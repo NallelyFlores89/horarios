@@ -1,0 +1,3 @@
+SELECT nombreuea FROM uea
+LEFT JOIN dias_has_uea ON uea_iduea=iduea
+WHERE dias_iddias=3;
