@@ -125,7 +125,7 @@
 													$add='HoraI';
 													foreach ($DataHorarios as $valor) {
 														$id=$add.strtolower($valor);
-														echo "<option id=$id name=$id>"; print_r($valor); echo "</option>";
+														echo "<option id=$id name=$id>"; print_r(substr($valor,0,-6)); echo "</option>";
 													}
 											    ?>
 									  		</select>
@@ -141,9 +141,10 @@
 													$add='HoraF';
 													foreach ($DataHorarios as $valor) {
 														$id=$add.strtolower($valor);
-														echo "<option id=$id name=$id>"; print_r($valor); echo "</option>";	
+														echo "<option id=$id name=$id>"; print_r(substr($valor,0,-6)); echo "</option>";	
 													}
 											    ?>
+									  		<option name="21:00">21:00</option>
 									  		</select>
 										</div>
 										<?php echo form_error('HoraFDropdown'); ?>

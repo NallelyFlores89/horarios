@@ -8,10 +8,10 @@
 		
 		}
 			
-		function obtenerIdProfesor($numEmp){
+		function obtenerIdProfesor($nombre){
 			$this->db->select('idprofesores');
 			$this->db->from('profesores');
-			$this->db->where('numempleado',$numEmp);
+			$this->db->where('nombre',$nombre);
 
 			$idProfesor=$this->db->get(); 
 			
@@ -27,10 +27,10 @@
 			
 		} //Fin de obtenRecursos105
 		
-		function obtenerIdUea($clave){
+		function obtenerIdUea($nombre){
 			$this->db->select('iduea');
 			$this->db->from('uea');
-			$this->db->where('clave',$clave);
+			$this->db->where('nombreuea',$nombre);
 			
 
 			$idUea=$this->db->get(); 
@@ -87,9 +87,9 @@
 			
 		}
 
-		function obtenerIdGrupo($grupo){
+		function obtenerIdGrupo($siglas){
 			$this->db->select('idgrupo');
-			$this->db->where('grupo',$grupo);
+			$this->db->where('siglas',$siglas);
 		
 			$idGrupo=$this->db->get('grupo'); 
 			
@@ -176,6 +176,19 @@
 			$this->db->insert('grupo', $datos); //Inserta en la tabla grupo
 		}
 		
+		function GetAutocomplete($options = array()){
+		    $this->db->select('nombre');
+		    $this->db->like('nombre', $options['keyword']);
+	   		$query = $this->db->get('profesores');
+			return $query->result();
+	    }
+
+		function GetAutocomplete2($options = array()){
+		    $this->db->select('nombreuea');
+		    $this->db->like('nombreuea', $options['keyword']);
+	   		$query2 = $this->db->get('uea');
+			return $query2->result();
+	    }				
 	} //Fin de la clase
 ?>
 

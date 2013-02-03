@@ -6,51 +6,15 @@
 	<meta name="viewport" content="width=device-width" />
     <title>Agregar horario</title>
 	<link href='http://fonts.googleapis.com/css?family=Gafata' rel='stylesheet' type='text/css'>
-
   	<link rel="stylesheet" href="<?=base_url(); ?>statics/foundation/stylesheets/foundation.min.css">
   	<link rel="stylesheet" href="<?=base_url(); ?>statics/foundation/stylesheets/zurb.mega-drop.css">
   	<link rel="stylesheet" href="<?=base_url(); ?>statics/foundation/stylesheets/app.css">
- 	<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.0/themes/base/jquery-ui.css" />
-
+ 
   	<script src="<?=base_url(); ?>statics/js/jquery-1.8.2.js"></script>
   	<script src="<?=base_url(); ?>statics/foundation/javascripts/foundation.min.js"></script>
   	<script src="<?=base_url(); ?>statics/foundation/javascripts/modernizr.foundation.js"></script>
-  	<script src="<?=base_url(); ?>statics/ui/jquery-ui-1.10.0.custom.min.js"></script>
+	<script src="<?=base_url(); ?>statics/js/solicitarLab.js"></script>
 
-	<script type="text/javascript">
-		$(document).ready(function() {
-			$("#nombreInput").autocomplete({
-				source: function(request, response) {
-					$.ajax({ 
-						url: "<?php echo site_url('agregar_horario_c/suggestions'); ?>",
-						data: { term: $("#nombreInput").val()},
-						dataType: "json",
-						type: "POST",
-						success: function(data){
-							response(data);
-						}
-					});
-				},
-				minLength: 1
-			});
-			$("#ueaInput").autocomplete({
-				source: function(request, response) {
-					$.ajax({ 
-						url: "<?php echo site_url('agregar_horario_c/suggestions2'); ?>",
-						data: { term: $("#ueaInput").val()},
-						dataType: "json",
-						type: "POST",
-						success: function(data){
-							response(data);
-						}
-					});
-				},
-				minLength: 1
-			});			
-			
-		});
-
-	</script>
 
 </head>
 
@@ -73,81 +37,145 @@
 							<div class="three columns">
 								<label for="numInput">No. Empleado</label>
 					  			<input type="text" id="numInput" name="numInput" value="<?php echo set_value('numInput'); ?>"/>
+						  		<?php echo form_error('numInput'); ?>
 						 	</div>
 						</div><hr>
 						<div class="row">
 							<label for="correoInput">Correo</label>
 				  			<input type="text" id="correoInput" name="correoInput" value="<?php echo set_value('correoInput'); ?>"/>
+					  		<?php echo form_error('correoInput'); ?>							
+							
 						</div><hr>
 							
 						<div class="row">
 							<div class="six columns">
-								<label for="ueaInput">Nombre de la UEA</label>
-					  			<input type="text" id="ueaInput" name="ueaInput" value="<?php echo set_value('ueaInput'); ?>"/>
+						  		<label for="ueaInput">Nombre de la UEA</label>
+						  		<input type="text" id="ueaInput" name="ueaInput" value="<?php echo set_value('ueaInput'); ?>"/>
 						  		<?php echo form_error('ueaInput'); ?>
-						   	</div>
+						  	</div>
 						  	<div class="two columns">
 						  		<label for="claveInput">Clave</label>
 						  		<input type="text" id="claveInput" name="claveInput" value="<?php echo set_value('claveInput'); ?>"/>
+						  		<?php echo form_error('claveInput'); ?>
 						  	</div>
 							<div class="two columns">
 						  		<label for="grupoInput">Grupo</label>
 						  		<input type="text" id="grupoInput" name="grupoInput" value="<?php echo set_value('grupoInput'); ?>"/>
+						  		<?php echo form_error('grupoInput'); ?>
 						  	</div>
 							<div class="two columns">
 						  		<label for="siglasInput">Siglas</label>
 						  		<input type="text" id="siglasInput" name="siglasInput" value="<?php echo set_value('siglasInput'); ?>"/>
 						  		<?php echo form_error('siglasInput'); ?>
-
 						  	</div>
+
 						</div><hr>
 		
 						<div class="row">
 						<div class="twelve columns">
 							<div class="row">
 						        <div class="six columns">
-						           	<label for="divisionesDropdown">Sección</label>
-										<?php echo form_dropdown('divisionesDropdown', $listaDivisiones['divisiones'], set_value('divisionesDropdown') ); ?>
+						           	<label for="divisionesDropdown">División</label>
+									  	<select id="divisionesDropdown" name="divisionesDropdown">
+											<?php 
+												$add='division';
+												foreach ($listaDivisiones['divisiones'] as $indice => $valor) {
+													$divisionid=$add.strtolower($valor);
+													echo "<option id=$divisionid name=$divisionid value=$indice>"; print_r($valor); echo "</option>";
+												}
+										    ?>
+								  		</select>
 								</div>
 		
 				                <div class="six columns">
 					                <label for="laboratoriosDropdown">Laboratorio</label>
+								  	<select id="laboratoriosDropdown" name="laboratoriosDropdown">
 										<?php 
-											foreach ($DataLabos as $value) {
-												$labos[$value['idlaboratorios']]=$value['nombrelaboratorios'];
+											$add='laboratorio';
+											foreach ($DataLabos as $valor) {
+												$id=$add.strtolower($valor['nombrelaboratorios']);
+												$value=$valor['idlaboratorios'];
+												echo "<option id=$id name=$id value=$value>"; print_r($valor['nombrelaboratorios']); echo "</option>";	
 											}
-											echo form_dropdown('laboratoriosDropdown', $labos, set_value('laboratoriosDropdown') );
 									    ?>
-
+							  		</select>
 								</div>
 							</div><hr>
-							
+						
 							<div class="twelve">
 								<div class="row>">
 						    	    <div class="six columns">
 							        	<label for="HoraIDropdown">Hora de inicio</label>
-											<?php 
-												foreach ($DataHorarios as $index => $value) {
-													$time[$index]=substr($value,0,-6);							
-												}
-												echo form_dropdown('HoraIDropdown', $time, set_value('HoraIDropdown') );
-											?>
+											
+										  	<select id="HoraIDropdown" name="HoraIDropdown">
+												<?php 
+													$horaVal=8.00;
+													$add='HoraI';
+													foreach ($DataHorarios as $valor) {
+														$id=$add.strtolower($valor);
+														echo "<option id=$id name=$id value=$horaVal>"; print_r(substr($valor,0,-6)); echo "</option>";
+														$horaVal=$horaVal+0.50;	
+													}
+											    ?>
+									  		</select>
 										</div>
 									</div>
 									
 									<div class="row">
 										<div class="six columns">
 							                <label for="HoraFAltDropdown">Hora de Term</label>
-											<?php 
-												foreach ($DataHorarios as $index => $value) {
-													$time[$index]=substr($value,0,-6);							
-												}
-												$time[27]='21:00';
-												echo form_dropdown('HoraFDropdown', $time, set_value('HoraFDropdown') );
-											?>
+			
+										  	<select id="HoraFDropdown" name="HoraFDropdown">
+												<?php 
+													$horaVal=8.00;
+													$add='HoraF';
+													foreach ($DataHorarios as $valor) {
+														$id=$add.strtolower($valor);
+														echo "<option id=$id name=$id value=$horaVal>"; print_r(substr($valor,0,-6)); echo "</option>";
+														$horaVal=$horaVal+0.50;	
+													}
+											    ?>
+											    <option value=21>21:00</option>
+									  		</select>
 										</div>
 									</div>
 								</div><hr><!--twelve -->	
+							
+								<div class="twelve">
+									<div class="row>">
+						                <div class="six columns">
+							                <label for="SemIDropdown">Semana de inicio</label>
+											
+										  	<select id="SemIDropdown" name="SemIDropdown">
+												<?php 
+													$add='SemI_';
+													foreach ($DataSem as $indice=>$valor) {
+														$id=$add.strtolower($indice);
+														echo "<option id=$id name=$id value=$indice>"; print_r($valor); echo "</option>";
+													
+													}
+											    ?>
+									  		</select>
+										</div>
+									</div>
+									
+									<div class="row">
+										<div class="six columns">
+							                <label for="SemFDropdown">Semana Final</label>
+			
+										  	<select id="SemFDropdown" name="SemFDropdown">
+												<?php 
+													$horaVal=8.00;
+													$add='SemF_';
+													foreach ($DataSem as $indice=>$valor) {
+														$id=$add.strtolower($indice);
+														echo "<option id=$id name=$id value=$indice>"; print_r($valor); echo "</option>";
+													}
+											    ?>
+									  		</select>
+										</div>
+									</div>
+								</div><hr> <!--twelve -->	
 								
 						</div> <!--twelve columns-->
 						</div>	<!--row-->

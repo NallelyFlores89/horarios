@@ -143,11 +143,14 @@
 			}			
 		} //Fin obtenLaboratorios	
 		
-		function editaProfesor($numEmp, $nuevo_nombre){
+		function editaProfesor($id, $nuevo_nombre, $num_emp, $correo){
 			$datos= Array(
 				'nombre'=>$nuevo_nombre,
+				'numempleado' => $num_emp,
+				'correo' => $correo
 			);
-			$this->db->where('numempleado',$numEmp);
+			
+			$this->db->where('idprofesores',$id);
 			$this->db->update('profesores', $datos); 	
 			
 		}
@@ -251,10 +254,10 @@
 			$this->db->delete('uea', $datos); 				
 		}
 
-		function eliminaProfesor($numEmp){
+		function eliminaProfesor($id){
 				
 			$datos = Array(
-				'numempleado' => $numEmp
+				'idprofesores' => $id
 			);
 			
 			$this->db->delete('profesores', $datos); 	

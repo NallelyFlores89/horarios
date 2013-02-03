@@ -14,6 +14,5 @@
  $config['charset']='utf-8';
  $config['newline']="\r\n";
  
- /* End of file email.php */
  /* Location: ./system/application/config/email.php */
  

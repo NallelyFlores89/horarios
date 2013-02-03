@@ -15,9 +15,9 @@
 			
 			for ($sem=1; $sem <=13; $sem++) {
 				for ($dias=1; $dias<=5; $dias++) {
-					for ($hora=1; $hora <=27; $hora++) { 
-						$this->Llena_tabla_laboratorios_grupo_m->inserta_laboratorios_grupo(220, $sem, $dias, $hora);
-					}
+					 for ($hora=1; $hora <=27; $hora++) { 
+						$this->Llena_tabla_laboratorios_grupo_m->inserta_laboratorios_grupo(219, $sem, $dias, 1);
+					 }
 				}
 			}
 			

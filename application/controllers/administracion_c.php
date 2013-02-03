@@ -20,31 +20,6 @@
 			}
 	    }
 		
-		function elimina_profesor($numEmp){
-			if(! $this->session->userdata('validated')){
-				redirect('loguin_c');
-			}else{				
-				if($_POST != NULL){
-					$idprof=$this->administracion_m->obtenIdProf($numEmp);
-					$grupos=$this->administracion_m->obtenGruposxProf($idprof); 
-					
-					
-					foreach ($grupos as $value) { //Elimina los grupos dados por el profesor
-						$this->administracion_m->eliminaGrupo($value['idgrupo']);
-					}
-					
-					//Eliminando al profesor
-					$this->administracion_m->eliminaProfesor($numEmp);
-										
-					echo "<script languaje='javascript' type='text/javascript'>
-							window.opener.location.reload();
-							window.close();</script>";				
-					
-				}else{
-					$this->load->view('elimina_profr');
-				}
-			}
-		}
 
 		function elimina_grupo($grupo){
 			if(! $this->session->userdata('validated')){

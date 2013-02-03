@@ -16,15 +16,12 @@
 			$this->db->where('uea.divisiones_iddivisiones',$idDivision);
 
 			$listaUeasCBS=$this->db->get(); //Vacía el contenido de la consulta en la variable
-			
 			if(($listaUeasCBS->num_rows())>0){
 				$indice=1;
 				foreach ($listaUeasCBS->result_array() as $value) {
 					$arregloUeasCBS[$indice] = $value;
 					$indice=$indice+1;
 				}
-				
-				//print_r($arregloUeas);
 				return ($arregloUeasCBS);
 			}else{
 				$mensaje_error="No hay datos que cargar";
@@ -100,15 +97,7 @@
 					
 					if($div->num_rows()>0){
 						foreach ($div->result_array() as $valor) {
-							if($valor['divisiones_iddivisiones']==1){
-								$divisiones[$indice]='CBI';
-							}
-							if($valor['divisiones_iddivisiones']==2){
-								$divisiones[$indice]='CBS';
-							}
-							if($valor['divisiones_iddivisiones']==3){
-								$divisiones[$indice]='CSH';
-							}														
+							$divisiones[$indice]=$valor['divisiones_iddivisiones'];
 						}
 					}
 					else{

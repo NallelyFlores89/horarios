@@ -25,7 +25,7 @@
 	<h3>Profesores-UEA</h3><br><br>
 		<table class="responsive contentHorario">
 			<tr>
-				<th>Profesor</th><th>N°. Empleado</th><th>Correo</th><th>UEA</th><th>Clave UEA</th><th>Siglas</th>
+				<th>Profesor</th><th>UEA</th><th>Siglas</th>
 				<th>Grupo</th><th>Lab</th><th colspan="5">Acciones</th>
 			</tr>
 				<?php  //Cargando datos 
@@ -35,17 +35,13 @@
 						foreach ($datosUPG as $valor) {
 							echo "<tr>";
 							echo"<td>";print_r(strtoupper($valor['nombre'])); echo"</td>";
-							echo"<td>";print_r($valor['numempleado']); echo"</td>";
-							echo"<td>";print_r($valor['correo']); echo"</td>";
 							echo"<td>";print_r(strtoupper($valor['nombreuea'])); echo"</td>";
-							echo"<td>";print_r($valor['clave']); echo"</td>";
 							echo"<td>";print_r(strtoupper($valor['siglas'])); echo"</td>";
 							echo"<td>";print_r(strtoupper($valor['grupo'])); echo"</td>";
 							echo"<td>";print_r($valor['idlaboratorios']); echo"</td>";
 						?>
-							<td><a href="#" onclick="ventanaEdita(<?= $valor['numempleado'] ?>,'<?= $valor['grupo']?>', <?= $valor['clave']?>, '<?=$valor['siglas'] ?>',<?= $valor['idlaboratorios'] ?>)">Editar profr/uea/grupo</a></td>
+							<td><a href="#" onclick="ventanaEdita(<?= $valor['numempleado'] ?>,'<?= $valor['grupo']?>', <?= $valor['clave']?>, '<?=$valor['siglas'] ?>',<?= $valor['idlaboratorios'] ?>)">Editar uea/grupo</a></td>
 							<td><a href="#" onclick="ventanaCambiaLabo('<?= $valor['grupo']?>',<?= $valor['idlaboratorios'] ?>)">Cambiar laboratorio</a></td>
-							<td><a href="#" onclick="ventanaEliminaProfr(<?= $valor['numempleado'] ?>)">Eliminar profesor</a></td>
 							<td><a href="#" onclick="ventanaEliminaGrupo('<?= $valor['grupo'] ?>')">Eliminar grupo</a></td>
 							<td><a href="#" onclick="ventanaEliminaUea(<?= $valor['clave'] ?>)">Eliminar uea</a></td>
 	

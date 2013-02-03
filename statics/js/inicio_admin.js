@@ -1,11 +1,5 @@
 $(document).ready(function(){
- 	$('#AdministracionBtn').click(function() {
-		 $(this).target = "_blank";
-			 window.open($(this).prop('href'));
-		     return false;
-	});
-
- 	$('#Administracion2Btn').click(function() {
+ 	$('#AdministracionBtn, #Administracion2Btn, #IrRecursosAdminBtn, #ProfesoresBtn').click(function() {
 		 $(this).target = "_blank";
 			 window.open($(this).prop('href'));
 		     return false;
@@ -26,9 +20,5 @@ $(document).ready(function(){
 		height:400,
 		width:770,
 	});
- 	$('#IrRecursosAdminBtn').click(function() {
-		 $(this).target = "_blank";
-			 window.open($(this).prop('href'));
-		     return false;
-	}); 	 
+	 
 })
