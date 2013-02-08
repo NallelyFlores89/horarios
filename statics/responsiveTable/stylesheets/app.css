@@ -14,7 +14,7 @@ body,p,h1,h2,h3,h4,label,a{	font-family:'Gafata', sans-serif;}
 dl.tabs dd.active{	border-top:3px solid #4DB788;}
 dl.tabs.pill dd.active a{	background-color:#4DB788;}
 table th { background:#E6E6E6;}
-
+.izq{text-align:left;}
 .listacbi{color:#46433A;}
 .listacbs{color:#64B6B1;}
 .listacsh{color:#CE534D;}

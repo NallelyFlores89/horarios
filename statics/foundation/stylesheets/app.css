@@ -10,6 +10,7 @@ ul.recursosAdmin{ list-style-position:outside;}
 label.pregunta{font-size: 16px; text-align:center; margin-bottom:25px;}
 .error{	color:#47834B;}
 table th {font-size:12px;}
+.izq{text-align:left;}
 label.semana{text-align:center;	font-size:11px;}
 body,p,h1,h2,h3,h4,label,a{ font-family:'Gafata', sans-serif;}
 .button { background: none repeat scroll 0 0 #4DB788; border: 1px solid #666666; color: #fff; font-family:'Gafata', sans-serif;  font-size: 14px;}

@@ -29,12 +29,11 @@
 		} 
 		
 		function obtenerInfoProfesorId($id){
+
 			$this->db->select('idprofesores, nombre, numempleado, correo');
 			$this->db->from('profesores');
 			$this->db->where('idprofesores',$id);
-			
 			$idProfesor=$this->db->get(); 
-			
 			if(($idProfesor->num_rows())>0){ //Verificando si tengo datos a cargar
 				foreach ($idProfesor->result_array() as $value) {
 					$idProfr[1] = $value;

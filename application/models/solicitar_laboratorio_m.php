@@ -27,6 +27,23 @@
 			}//fin del else
 		} //Fin de obtenListaDivisiones
 
+		function obtenDivision($id){
+			$this->db->select('nombredivision');
+			$this->db->from('divisiones');
+			$this->db->where('iddivisiones',$id);
+
+			$listaDivisiones=$this->db->get(); 
+			
+			if(($listaDivisiones->num_rows())>0){
+			
+				foreach ($listaDivisiones->result_array() as $value) {
+					$arregloDivisiones[1] = $value['nombredivision'];
+				}
+				return ($arregloDivisiones[1]);
+			}else{
+				return 0;
+			}//fin del else
+		}
 	
 		function Obtenhorarios(){
 			$this->db->select('hora');
@@ -47,10 +64,27 @@
 			
 		} //fin Obtenhorarios	
 		
+		function ObtenHora($id){
+			$this->db->select('hora');
+			$this->db->from('horarios');
+			$this->db->where('idhorarios',$id);
+			$lHorarios=$this->db->get();
+
+			if(($lHorarios->num_rows())>0){
+				foreach ($lHorarios->result_array() as $value) {
+					$arregloHorarios[1] = $value['hora'];
+				}
+				return ($arregloHorarios[1]);
+			}else{
+				return 0;
+			}//fin del else
+			
+		}
+		
 		function obtenerSemana(){
 			$this->db->select('semana');
 			$this->db->from('semanas');
-
+	
 			$semanas=$this->db->get(); 
 			$indice=1;
 			if(($semanas->num_rows())>0){

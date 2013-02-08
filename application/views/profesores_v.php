@@ -51,7 +51,7 @@
 				}else{
 					foreach ($datosProf as $valor) {
 						echo "<tr>";
-						echo"<td>";print_r(strtoupper($valor['nombre'])); echo"</td>";
+						echo"<td class='izq'>";print_r(strtoupper($valor['nombre'])); echo"</td>";
 						echo"<td>";print_r($valor['numempleado']); echo"</td>";
 						echo"<td>";print_r($valor['correo']); echo"</td>";
 						$id=$valor['idprofesores'];

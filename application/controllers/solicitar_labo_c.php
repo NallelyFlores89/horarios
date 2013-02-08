@@ -13,42 +13,51 @@
 			$this->load->library('email');
 		}
 		
-		function index()	{           
-			$DataDivision['datosDivision']=$this->Solicitar_laboratorio_m->ObtenListaDivisiones(); //Obteniendo mis datos
+		function index()	{
+				           
+			$Datos['division']=$this->Solicitar_laboratorio_m->ObtenListaDivisiones(); //Obteniendo mis datos
 	
-			if($DataDivision['datosDivision'] > 0){
-				foreach ($DataDivision['datosDivision'] as $indice => $division) {
-					$divisiones['divisiones'][$indice]=$division;
+			if($Datos['division'] > 0){
+				foreach ($Datos['division'] as $indice => $division) {
+					$Datos['divisiones'][$indice]=$division;
 				}
 			}else{
 				$mensaje='No hay datos';
-				$divisiones['divisiones'][1]=$mensaje;
+				$Datos['divisiones'][1]=$mensaje;
 			}		
 			 
-			$DataHorarios['hora']=$this->Solicitar_laboratorio_m->Obtenhorarios();
-			$DataSem=$this->Solicitar_laboratorio_m->obtenerSemana();
-			$DataLabos=$this->Solicitar_laboratorio_m->obtenLaboratorios();
+			$Datos['hora']=$this->Solicitar_laboratorio_m->Obtenhorarios();
+			$Datos['semanas']=$this->Solicitar_laboratorio_m->obtenerSemana();
+			$Datos['laboratorios']=$this->Solicitar_laboratorio_m->obtenLaboratorios();
 			
-			$datos=Array(
-					'listaDivisiones' => $divisiones,
-					'DataLabos' => $DataLabos,
-					'DataHorarios' => $DataHorarios['hora'],
-					'DataSem' => $DataSem
-					
-
-			);
 
 			/**Validación del formulario**/			
 			$this->form_validation->set_rules('nombreInput', 'nombreInput', 'callback_nombreInput_check');
-			$this->form_validation->set_rules('numInput', 'numInput', 'callback_numInput_check');
-			$this->form_validation->set_rules('correoInput', 'correoInput', 'callback_correoInput_check');
-			$this->form_validation->set_rules('ueaInput', 'ueaInput', 'callback_ueaInput_check');
-			$this->form_validation->set_rules('claveInput', 'claveInput', 'callback_claveInput_check');
-			$this->form_validation->set_rules('grupoInput', 'grupoInput', 'callback_grupoInput_check');
 			$this->form_validation->set_rules('checkboxes[]', 'checkboxes', 'required');
 			$this->form_validation->set_message('required','Debe seleccionar al menos un día');
+			$this->form_validation->set_rules('correoInput', 'correoInput', 'callback_correoInput_check');
+			$this->form_validation->set_rules('ueaInput', 'ueaInput', 'callback_ueaInput_check');
+			
+			$this->form_validation->set_rules('claveInput', 'claveInput', '');
+			$this->form_validation->set_rules('grupoInput', 'grupoInput', '');
+			$this->form_validation->set_rules('numInput', 'numInput', '');
+			$this->form_validation->set_rules('comentarios', 'comentarios', '');
+			$this->form_validation->set_rules('recursos', 'recursos', '');
+			$this->form_validation->set_rules('divisionesDropdown', 'divisionesDropdown', '');
+			$this->form_validation->set_rules('laboratoriosDropdown', 'laboratoriosDropdown', '');
+			$this->form_validation->set_rules('laboratoriosAltDropdown', 'laboratoriosAltDropdown', '');
+			$this->form_validation->set_rules('HoraIDropdown', 'HoraIDropdown', '');
+			$this->form_validation->set_rules('HoraFDropdown', 'HoraFDropdown', '');		
+			$this->form_validation->set_rules('SemIDropdown', 'SemIDropdown', '');		
+			$this->form_validation->set_rules('SemFDropdown', 'SemFDropdown', '');		
+
 			
 			if($this->form_validation->run()){
+					
+				$divi = $this->Solicitar_laboratorio_m->obtenDivision($_POST['divisionesDropdown']);
+				$h1=$this->Solicitar_laboratorio_m->obtenHora($_POST['HoraIDropdown']);
+				$h2=$this->Solicitar_laboratorio_m->obtenHora($_POST['HoraFDropdown']);
+				
 				$datos_correo=Array(
 					'nombre' => $_POST['nombreInput'],
 					'numero' => $_POST['numInput'],
@@ -56,11 +65,11 @@
 					'uea' =>$_POST['ueaInput'],
 					'clave' => $_POST['claveInput'],
 					'grupo' =>$_POST['grupoInput'],
-					'division' => $_POST['divisionesDropdown'],
+					'division' => $divi,
 					'laboratorio' => $_POST['laboratoriosDropdown'],
 					'laboratorioAlt' => $_POST['laboratoriosAltDropdown'],
-					'hora_i' => $_POST['HoraIDropdown'],
-					'hora_f' => $_POST['HoraFDropdown'],
+					'hora_i' => substr($h1,0,-6),
+					'hora_f' => substr($h2,0,-6),
 					'recursos' => $_POST['recursos'],
 					'dias' => $_POST['checkboxes'],
 					'semI' => $_POST['SemIDropdown'],
@@ -102,20 +111,15 @@
 				
 				}else{ //En otro caso, le indica al usuario que el horario no está disponible
 					
-					$this->load->view('solicitar_lab_v', $datos);
+					$this->load->view('solicitar_lab_v', $Datos);
 					echo "<label class='error'>Lo sentimos. El laboratorio que usted está solicitando, no está disponible
 				    en este horario</label>";	
 				}
-					
-							
-				
-				
-				
-			}
-			else{
-				$this->load->view('solicitar_lab_v', $datos);
-				$this->load->view('footer');
-			}
+		} //Fin de validación
+		else{
+			$this->load->view('solicitar_lab_v', $Datos);
+			$this->load->view('footer');
+		}
 			
 
 		} //Fin de index
@@ -143,33 +147,6 @@
 		public function ueaInput_check($ueaInput){
 				if($ueaInput==''){
 						$this->form_validation->set_message('ueaInput_check','Campo obligatorio');
-						return FALSE;
-					
-				}else
-						return TRUE;
-		}
-		
-		public function claveInput_check($ueaInput){
-				if($ueaInput==''){
-						$this->form_validation->set_message('claveInput_check','Campo obligatorio');
-						return FALSE;
-					
-				}else
-						return TRUE;
-		}
-		
-		public function grupoInput_check($grupoInput){
-				if($grupoInput==''){
-						$this->form_validation->set_message('grupoInput_check','Campo obligatorio');
-						return FALSE;
-					
-				}else
-						return TRUE;
-		}
-
-		public function numInput_check($numInput){
-				if($numInput==''){
-						$this->form_validation->set_message('numInput_check','Campo obligatorio');
 						return FALSE;
 					
 				}else

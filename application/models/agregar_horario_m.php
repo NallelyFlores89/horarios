@@ -176,19 +176,67 @@
 			$this->db->insert('grupo', $datos); //Inserta en la tabla grupo
 		}
 		
-		function GetAutocomplete($options = array()){
-		    $this->db->select('nombre');
+		function propon_profesor($options = array()){
+		    $this->db->select('nombre,idprofesores');
 		    $this->db->like('nombre', $options['keyword']);
 	   		$query = $this->db->get('profesores');
 			return $query->result();
 	    }
-
-		function GetAutocomplete2($options = array()){
+		
+		function propon_uea($options = array()){
 		    $this->db->select('nombreuea');
 		    $this->db->like('nombreuea', $options['keyword']);
 	   		$query2 = $this->db->get('uea');
 			return $query2->result();
-	    }				
+	    }
+		
+		function busca_id_profesor($options = array()){
+		    $this->db->select('idprofesores');
+		    $this->db->where('nombre', $options['keyword']);
+	   		$query = $this->db->get('profesores');
+			return $query->result();
+	    }
+
+		function busca_id_uea($options = array()){
+		    $this->db->select('iduea');
+		    $this->db->where('nombreuea', $options['keyword']);
+	   		$query = $this->db->get('uea');
+			return $query->result();
+	    }
+		function busca_num_empleado($options = array()){
+		    $this->db->select('numempleado');
+		    $this->db->where('idprofesores', $options['keyword']);
+	   		$query = $this->db->get('profesores');
+			if($query->num_rows()>0){
+				return $query->result();
+			}
+			else{
+				return -1;	
+			}
+	    }		
+
+		function busca_clave($options = array()){
+		    $this->db->select('clave');
+		    $this->db->where('iduea', $options['keyword']);
+	   		$query = $this->db->get('uea');
+			if($query->num_rows()>0){
+				return $query->result();
+			}
+			else{
+				return -1;	
+			}
+	    }
+		function busca_correo_empleado($options = array()){
+		    $this->db->select('correo');
+		    $this->db->where('idprofesores', $options['keyword']);
+	   		$query = $this->db->get('profesores');
+			if($query->num_rows()>0){
+				return $query->result();
+			}
+			else{
+				return -1;	
+			}
+	    }						
 	} //Fin de la clase
 ?>
 

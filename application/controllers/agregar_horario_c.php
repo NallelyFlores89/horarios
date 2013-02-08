@@ -8,12 +8,13 @@
 			$this->load->helper(array('html', 'url'));
 			$this->load->model('Solicitar_laboratorio_m'); //Cargando mi modelo
 			$this->load->model('Agregar_horario_m'); //Cargando mi modelo
-						
+			$this->load->model('profesores_m'); //Cargando mi modelo
+									
 			$this->load->library('form_validation');
 			$this->form_validation->set_error_delimiters('<div class="error">', '</div>');
 		}
 		
-		function index()	{           //Cargamos vista
+		function index(){         //Cargamos vista
 			
 			if(! $this->session->userdata('validated')){
 				redirect('loguin_c');
@@ -60,7 +61,7 @@
 						'DataHorarios' => $DataHorarios['hora'],
 						'GrupoExiste' => $GrupoExiste,
 				);
-			
+				
 				if($this->form_validation->run()){
 
 					//INSERTANDO DATOS EN BD
@@ -138,21 +139,20 @@
 				} //Login
 			} //Fin de index
 			
-			function suggestions(){
+			function propon_profesor(){
 				$term = $this->input->post('term',TRUE);
-				$rows = $this->Agregar_horario_m->GetAutocomplete(array('keyword' => $term));
-			
+				$rows = $this->Agregar_horario_m->propon_profesor(array('keyword' => $term));
 				$json_array = array();
+				
 				foreach ($rows as $row){
-					 array_push($json_array, $row->nombre);
-				}
-			
+					 $json_array[$row->idprofesores]=$row->nombre;
+				}			
 				echo json_encode($json_array);
 			}	
-
-			function suggestions2(){
+			
+			function propon_uea(){
 				$term = $this->input->post('term',TRUE);
-				$rows = $this->Agregar_horario_m->GetAutocomplete2(array('keyword' => $term));
+				$rows = $this->Agregar_horario_m->propon_uea(array('keyword' => $term));
 			
 				$json_array = array();
 				foreach ($rows as $row){
@@ -161,7 +161,74 @@
 			
 				echo json_encode($json_array);
 			}
-						
+
+			function busca_id_prof(){
+				$term = $this->input->post('term2',TRUE);
+				$rows = $this->Agregar_horario_m->busca_id_profesor(array('keyword' => $term));
+				$json_array = array();
+				
+				foreach ($rows as $row){
+					array_push($json_array, $row->idprofesores);				
+				}			
+				echo json_encode($json_array);
+			}
+			
+			function busca_num_empleado(){
+				$term = $this->input->post('term3',TRUE);
+				$rows = $this->Agregar_horario_m->busca_num_empleado(array('keyword' => $term));
+				$json_array = array();
+
+				if($rows != -1){
+					foreach ($rows as $row){
+						array_push($json_array, $row->numempleado);
+					}			
+					echo json_encode($json_array);
+				}else{
+					echo json_encode("No número");
+				}
+			}
+			
+			function busca_correo_empleado(){
+				$term = $this->input->post('term4',TRUE);
+				$rows = $this->Agregar_horario_m->busca_correo_empleado(array('keyword' => $term));
+				$json_array = array();
+
+				if($rows != -1){
+					foreach ($rows as $row){
+						array_push($json_array, $row->correo);
+					}			
+					echo json_encode($json_array);
+				}else{
+					echo json_encode("No correo");
+				}
+			}
+
+			function busca_id_uea(){
+				$term = $this->input->post('termUea',TRUE);
+				$rows = $this->Agregar_horario_m->busca_id_uea(array('keyword' => $term));
+				$json_array = array();
+				
+				foreach ($rows as $row){
+					array_push($json_array, $row->iduea);				
+				}			
+				echo json_encode($json_array);
+			}
+
+			function busca_clave(){
+				$term = $this->input->post('idUea',TRUE);
+				$rows = $this->Agregar_horario_m->busca_clave(array('keyword' => $term));
+				$json_array = array();
+
+				if($rows != -1){
+					foreach ($rows as $row){
+						array_push($json_array, $row->clave);
+					}			
+					echo json_encode($json_array);
+				}else{
+					echo json_encode(-1);
+				}
+			}
+																		
 			public function nombreInput_check($nombreInput){
 					if($nombreInput==''){
 							$this->form_validation->set_message('nombreInput_check','Campo obligatorio. Por favor, introduce nombre');

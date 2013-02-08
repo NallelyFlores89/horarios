@@ -22,32 +22,119 @@
 			$("#nombreInput").autocomplete({
 				source: function(request, response) {
 					$.ajax({ 
-						url: "<?php echo site_url('agregar_horario_c/suggestions'); ?>",
+						url: "<?php echo site_url('agregar_horario_c/propon_profesor'); ?>",
 						data: { term: $("#nombreInput").val()},
 						dataType: "json",
 						type: "POST",
-						success: function(data){
+						success: function(data){	
 							response(data);
-						}
-					});
-				},
+							$("#nombreInput").change(function(){
+								$("#numInput").removeAttr('disabled')
+								$("#correoInput").removeAttr('disabled')
+								$.ajax({
+									url: "<?php echo site_url('agregar_horario_c/busca_id_prof'); ?>",
+									data: { term2:$("#nombreInput").val() },
+									dataType: "json",
+									type: "POST",
+									success:function(data2){
+										$("#id_prof").val(data2);
+											$.ajax({
+												url: "<?php echo site_url('agregar_horario_c/busca_num_empleado'); ?>",
+												data: { term3: $("#id_prof").val() },
+												dataType: "json",
+												type: "POST",
+												success:function(data3){
+													if(data3==0000){
+														$("#numInput").val('No número')
+														$("#numInput").attr('disabled','')
+													}else{
+														if(data3=='No número'){
+															$("#numInput").val('')
+														}else{
+															$("#numInput").val(data3)
+															$("#numInput").attr('disabled','')															
+															
+														}
+													
+													}
+												}										
+											})
+											
+											$.ajax({
+												url:"<?php echo site_url('agregar_horario_c/busca_correo_empleado'); ?>",
+												data: { term4: $("#id_prof").val()},
+												dataType: "json",
+												type: "POST",
+												success: function(data4){
+													if(data4==""){
+														$("#correoInput").val('No correo')
+														$("#correoInput").attr('disabled','')
+													}else{
+														if(data4=='No correo'){
+															$("#correoInput").val('')
+														}else{
+															$("#correoInput").val(data4)
+															$("#correoInput").attr('disabled','')
+														}
+													}
+												}
+											})
+										}
+									})
+								})
+							}
+						});
+					},
 				minLength: 1
 			});
+
 			$("#ueaInput").autocomplete({
 				source: function(request, response) {
 					$.ajax({ 
-						url: "<?php echo site_url('agregar_horario_c/suggestions2'); ?>",
+						url: "<?php echo site_url('agregar_horario_c/propon_uea'); ?>",
 						data: { term: $("#ueaInput").val()},
 						dataType: "json",
 						type: "POST",
 						success: function(data){
 							response(data);
+							$("#ueaInput").change(function(){
+								$("#claveInput").removeAttr('disabled')
+								$.ajax({
+									url: "<?php echo site_url('agregar_horario_c/busca_id_uea'); ?>",
+									data: { termUea: $("#ueaInput").val() },
+									dataType: "json",
+									type: "POST",
+									success:function(data){								
+										$("#ueaId").val(data)
+										$.ajax({
+											url: "<?php echo site_url('agregar_horario_c/busca_clave'); ?>",
+											data: { idUea: $("#ueaId").val() },
+											dataType: "json",
+											type: "POST",
+											success:function(data){	
+												if(data == -1){
+													$("#claveInput").val('')
+												}else{
+													if(data==''){
+														$("#claveInput").val('No clave')
+														$("#claveInput").attr('disabled','')	
+													}else{
+														$("#claveInput").val(data)
+														$("#claveInput").attr('disabled','')
+													}
+												}
+				
+											}
+											
+										})
+									}		
+								})
+							})
 						}
 					});
 				},
 				minLength: 1
-			});			
-			
+			});		
 		});
 
 	</script>
@@ -67,9 +154,11 @@
 							<div class="nine columns">
 								<label for="nombreInput">Nombre del profesor</label>
 					  			<input type="text" id="nombreInput" name="nombreInput" value="<?php echo set_value('nombreInput'); ?>"/>
+						  		<input type="hidden" id="id_prof">
 						  		<?php echo form_error('nombreInput'); ?>
 
 						 	</div>
+						 	
 							<div class="three columns">
 								<label for="numInput">No. Empleado</label>
 					  			<input type="text" id="numInput" name="numInput" value="<?php echo set_value('numInput'); ?>"/>
@@ -84,6 +173,7 @@
 							<div class="six columns">
 								<label for="ueaInput">Nombre de la UEA</label>
 					  			<input type="text" id="ueaInput" name="ueaInput" value="<?php echo set_value('ueaInput'); ?>"/>
+					  			<input type="hidden" id="ueaId" name="ueaId" />
 						  		<?php echo form_error('ueaInput'); ?>
 						   	</div>
 						  	<div class="two columns">
