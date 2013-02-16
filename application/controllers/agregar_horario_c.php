@@ -22,6 +22,7 @@
 				$GrupoExiste=0;
 				
 				$DataDivision['datosDivision']=$this->Solicitar_laboratorio_m->ObtenListaDivisiones(); 
+				$dias=$this->Solicitar_laboratorio_m->ObtenDias();
 		
 				if($DataDivision['datosDivision'] > 0){
 					foreach ($DataDivision['datosDivision'] as $indice => $division) {
@@ -60,6 +61,7 @@
 						'DataSem' => $DataSem,
 						'DataHorarios' => $DataHorarios['hora'],
 						'GrupoExiste' => $GrupoExiste,
+						'dias' => $dias
 				);
 				
 				if($this->form_validation->run()){

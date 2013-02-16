@@ -8,6 +8,8 @@
 			
 			$this->load->helper(array('html', 'url'));
 	        $this->load->model('administracion_m'); // modelo
+			$this->load->model('profesores_m');
+			$this->load->model('solicitar_laboratorio_m');
 			
 	   	}
 
@@ -21,12 +23,11 @@
 	    }
 		
 
-		function elimina_grupo($grupo){
+		function elimina_grupo($idgrupo){
 			if(! $this->session->userdata('validated')){
 				redirect('loguin_c');
 			}else{				
 				if($_POST != NULL){
-					$idgrupo=$this->administracion_m->obtenIdGrupo($grupo);
 					$this->administracion_m->eliminaGrupo($idgrupo);
 					echo "<script languaje='javascript' type='text/javascript'>
 							window.opener.location.reload();
@@ -37,67 +38,59 @@
 			}			
 		}	
 			
-		function elimina_uea($clave){
+		function elimina_uea($iduea){
 			if(! $this->session->userdata('validated')){
 				redirect('loguin_c');
 			}else{
 				if($_POST != NULL){
-					$iduea=$this->administracion_m->obtenIdUea($clave);
 					$this->administracion_m->eliminaUEA($iduea);
-					echo "<script languaje='javascript' type='text/javascript'>
-							window.opener.location.reload();
-							window.close();</script>";				
+					echo "llega?";
+					// echo "<script languaje='javascript' type='text/javascript'>
+							// window.opener.location.reload();
+							// window.close();</script>";				
 				}else{
 					$this->load->view('elimina_uea_v');
 				}
 			}	
 		}	
 
-		function edita($numEmp, $grupo, $claveUEA, $siglas, $idlab){
+		function edita($iduea, $siglas){
 			if(! $this->session->userdata('validated')){
 				redirect('loguin_c');
 			}else{
-				$datos['profesor']=$this->administracion_m->obtenDatosProfesor($numEmp);
-				$datos['uea'] =$this->administracion_m->obtenDatosUEA($claveUEA);
-				$datos['grupo'] =$grupo;
-				$datos['siglas'] = $siglas;
-				$datos['idlab'] =$idlab;
-				
-				$this->form_validation->set_rules('nombreInput', 'nombreInput', 'required');
+				$datos =$this->administracion_m->obtenDatosGrupo($siglas);
 				$this->form_validation->set_rules('ueaInput', 'ueaInput', 'required');
-				$this->form_validation->set_rules('grupoInput', 'grupoInput', 'required');
 				$this->form_validation->set_rules('siglasInput', 'siglasInput', 'required');
+				
+				$this->form_validation->set_rules('grupoInput', 'grupoInput', '');
+				$this->form_validation->set_rules('claveInput', 'claveInput', '');
+				
 				$this->form_validation->set_message('required','Este campo no puede ser nulo');
-				$this->form_validation->set_message('email_valid','Ingrese una dirección de correo valida');
 	
 				if($this->form_validation->run()){
 					
-					$this->administracion_m->editaProfesor($numEmp, $_POST['nombreInput'], $correo);
-					$this->administracion_m->editaUEA($claveUEA, $_POST['ueaInput']);
-					$this->administracion_m->editaGrupo($grupo, $_POST['grupoInput']);
-					$this->administracion_m->editaSiglas($grupo, $_POST['siglasInput']);
-					$idgrupo=$this->administracion_m->obtenIdGrupo($grupo);
-					
+					$this->administracion_m->editaUEA($datos[1]['nombreuea'], $_POST['ueaInput'], $_POST['claveInput']);
+					$this->administracion_m->editaGrupo($datos[1]['siglas'],$_POST['grupoInput'], $_POST['siglasInput']);
+				
 					echo "<script languaje='javascript' type='text/javascript'>
 							window.opener.location.reload();
 			                window.close();</script>";
 			                
 				}else{
-					$this->load->view('admin_edita_v',$datos);
+					$this->load->view('admin_edita_v',$datos[1]);
 				}	
 			}
 		} //Fin función
 		
-		function cambia_labo($grupo, $idlab){
+		function cambia_labo($idgrupo, $idlab){
 			if(! $this->session->userdata('validated')){
 				redirect('loguin_c');
 			}else{
 				$datos['laboratorios']=$this->administracion_m->obtenLaboratorios();
+				$datos['idlab'] = $idlab;
 				
 				if($_POST != NULL){ //Recibe la petición para cambiar de laboratorio
 				
-					$idgrupo=$this->administracion_m->obtenIdGrupo($grupo);
-					print_r($idgrupo);
 					$laboratorios_grupo = $this->administracion_m->obtenDatosLaboratoriosGrupo($idgrupo);
 					$indice=1;
 					foreach ($laboratorios_grupo as $value) { //Obteniendo datos para cambiar de laboratorio
@@ -126,8 +119,87 @@
 				
 				$this->load->view('editaLabo_v',$datos);
 			}		
+		} //Fin función cambia labos
+		
+		function cambiaProfe($idgrupo, $idprofesor){
+			
+			if(! $this->session->userdata('validated')){
+				redirect('loguin_c');
+			}else{
+				$datos['profesor'] = $this->profesores_m->obtenerInfoProfesorId($idprofesor);
+				$this->form_validation->set_rules('profesor', 'profesor', 'required');
+				$this->form_validation->set_message('required','Este campo no puede ser nulo');
+
+				if($this->form_validation->run()){ 
+
+					$idprof = $this->administracion_m->obtenIdProf($_POST['profesor']);
+
+					//Si el profesor no existe, se inserta en la base de datos
+					if($idprof == -1){
+						$this->profesores_m->inserta_profesores($_POST['profesor'], '', '');
+						$idprof = $this->administracion_m->obtenIdProf($_POST['profesor']);
+						echo $idprof;
+						$this->administracion_m->cambiaProfesor($idgrupo, $idprof);						
+						
+					}else{ 	//En caso de que exista, se le asigna su id al grupo					
+
+						$idprof = $this->administracion_m->obtenIdProf($_POST['profesor']);
+						$this->administracion_m->cambiaProfesor($idgrupo, $idprof);
+					}
+
+					echo "<script languaje='javascript' type='text/javascript'>
+						    window.opener.location.reload();
+			                window.close();</script>";
+				}else{				
+					$this->load->view('cambiar_profe_v',$datos);
+				}			
+			
+			}
 		}
 		
+		function cambiaHora($idgrupo, $siglas, $idlab){
+			if(! $this->session->userdata('validated')){
+				redirect('loguin_c');
+			}else{
+				
+				$datos['horarios'] = $this->solicitar_laboratorio_m->Obtenhorarios();
+				$datos['dias'] = $this->solicitar_laboratorio_m->ObtenDias();
+				$horario_grupo = $this->administracion_m->obtenDatosLaboratoriosGrupo2($idgrupo, $idlab);
+				$horas=array(); $dias=array(); $semanas=array(); $lab=array();
+				foreach ($horario_grupo as $value) {
+					array_push($horas,$value['horarios_idhorarios']);
+					array_push($semanas, $value['semanas_idsemanas']);
+					array_push($dias, $value['dias_iddias']);
+				}
+				
+				$hrs = array_unique($horas);
+				$datos['hora_i'] = array_shift($hrs);
+				$datos['hora_f'] = end($hrs);				
+				$datos['dias_g'] = array_unique($dias);
+				$datos['semanas'] = array_unique($semanas);
 
+				if($_POST != NULL){ //Recibe la petición para cambiar de laboratorio
+
+					//Borra el grupo de su horario original					
+					
+					$this->administracion_m->borraGrupo($idgrupo, $idlab);
+					
+					//Inserta grupo en su horario nuevo
+					
+					for ($weeks=1; $weeks <13 ; $weeks++) {
+						foreach ($_POST['diasCheckBox'] as $value) {
+							for ($horas=$_POST['HoraIDropdown']; $horas <= $_POST['HoraFDropdown']; $horas++) { 
+								$this->administracion_m->editaLabo($idlab, $idgrupo, $value, $weeks, $horas);
+							}
+						} 
+					}
+					echo "<script languaje='javascript' type='text/javascript'>
+						    window.opener.location.reload();
+			                window.close();</script>";
+				}else{
+					$this->load->view('cambiaHora_v', $datos);
+				}
+			}		
+		}
 	}
 ?>

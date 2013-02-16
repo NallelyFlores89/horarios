@@ -20,19 +20,13 @@
 			<div class="twelve columns">
 				<fieldset>
 				<form method="POST">
-	                <label for="laboratoriosDropdown" class="pregunta">Trasladar grupo al laboratorio</label>
-				  	<select id="laboratoriosDropdown" name="laboratoriosDropdown">
+	                <label for="laboratoriosDropdown">Laboratorio</label>
 						<?php 
-							foreach ($laboratorios as $indice => $valor) {
-								$id=$valor['idlaboratorios'];
-								if($id == $idlab){
-									echo "<option id=$id name=$id value=$id selected>"; print_r($valor['nombrelaboratorios']); echo "</option>";
-								}else{
-									echo "<option id=$id name=$id value=$id>"; print_r($valor['nombrelaboratorios']); echo "</option>";
-								}	
+							foreach ($laboratorios as $value) {
+								$labos[$value['idlaboratorios']]=$value['nombrelaboratorios'];
 							}
+							echo form_dropdown('laboratoriosDropdown', $labos, $idlab);
 					    ?>
-			  		</select>
 					<br><br>
 					<div class="row"></div>
 						<input type="submit" id="editar" class="button offset-by-two" value="Guardar cambios" />

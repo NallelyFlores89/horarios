@@ -22,11 +22,12 @@
 
 <body>
 	<div class="container">
-	<h3>Profesores-UEA</h3><br><br>
+	<h3>UEA's</h3><br><br>
+
 		<table class="responsive contentHorario">
 			<tr>
-				<th>Profesor</th><th>UEA</th><th>Siglas</th>
-				<th>Grupo</th><th>Lab</th><th colspan="5">Acciones</th>
+				<th>Profesor</th><th>UEA</th><th>Clave</th><th>Siglas</th>
+				<th>Grupo</th><th>Lab</th><th colspan="6">Acciones</th>
 			</tr>
 				<?php  //Cargando datos 
 					if($datosUPG==-1){
@@ -34,23 +35,25 @@
 					}else{
 						foreach ($datosUPG as $valor) {
 							echo "<tr>";
-							echo"<td>";print_r(strtoupper($valor['nombre'])); echo"</td>";
-							echo"<td>";print_r(strtoupper($valor['nombreuea'])); echo"</td>";
+							echo"<td class='izq'>";print_r(strtoupper($valor['nombre'])); echo"</td>";
+							echo"<td class='izq'>";print_r(strtoupper($valor['nombreuea'])); echo"</td>";
+							echo"<td>";print_r(strtoupper($valor['clave'])); echo"</td>";
 							echo"<td>";print_r(strtoupper($valor['siglas'])); echo"</td>";
 							echo"<td>";print_r(strtoupper($valor['grupo'])); echo"</td>";
 							echo"<td>";print_r($valor['idlaboratorios']); echo"</td>";
 						?>
-							<td><a href="#" onclick="ventanaEdita(<?= $valor['numempleado'] ?>,'<?= $valor['grupo']?>', <?= $valor['clave']?>, '<?=$valor['siglas'] ?>',<?= $valor['idlaboratorios'] ?>)">Editar uea/grupo</a></td>
-							<td><a href="#" onclick="ventanaCambiaLabo('<?= $valor['grupo']?>',<?= $valor['idlaboratorios'] ?>)">Cambiar laboratorio</a></td>
-							<td><a href="#" onclick="ventanaEliminaGrupo('<?= $valor['grupo'] ?>')">Eliminar grupo</a></td>
-							<td><a href="#" onclick="ventanaEliminaUea(<?= $valor['clave'] ?>)">Eliminar uea</a></td>
+							<td><a href="#" onclick="ventanaEdita(<?=$valor['iduea'] ?>, '<?= $valor['siglas'] ?>')">Editar</a></td>
+							<td><a href="#" onclick="ventanaCambiaHora(<?= $valor['idgrupo']?>,'<?= $valor['siglas']?>', <?= $valor['idlaboratorios'] ?>)">Cambiar horario</a></td>
+							<td><a href="#" onclick="ventanaCambiaLabo('<?= $valor['idgrupo']?>',<?= $valor['idlaboratorios'] ?>)">Cambiar lab</a></td>
+							<td><a href="#" onclick="ventanaCambiaProfe('<?= $valor['idgrupo'] ?>','<?= $valor['idprofesores'] ?>')">Cambiar profesor</a></td>
+							<td><a href="#" onclick="ventanaEliminaGrupo('<?= $valor['idgrupo'] ?>')">Eliminar grupo</a></td>
+							<td><a href="#" onclick="ventanaEliminaUea(<?= $valor['iduea'] ?>)">Eliminar uea</a></td>
 	
 							<?php echo "</tr>";
 						 }
 					}								 
 				?>
 		</table> <!--TERMINA LA TABLA -->
-
  	</div> <!--container-->
 </body>
 </html>

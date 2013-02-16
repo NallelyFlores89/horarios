@@ -105,6 +105,7 @@
 			
 		}
 		
+		
 		function obtenerSemana(){
 			$this->db->select('semana');
 			$this->db->from('semanas');
@@ -123,6 +124,7 @@
 			}			
 			
 		}
+		
 		
 		function inserta_profesores($nombre, $num_emp, $correo){
 				

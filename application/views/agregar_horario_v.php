@@ -223,21 +223,21 @@
 												echo form_dropdown('HoraIDropdown', $time, set_value('HoraIDropdown') );
 											?>
 										</div>
-									</div>
+								</div>
 									
-									<div class="row">
-										<div class="six columns">
-							                <label for="HoraFAltDropdown">Hora de Term</label>
-											<?php 
-												foreach ($DataHorarios as $index => $value) {
-													$time[$index]=substr($value,0,-6);							
-												}
-												$time[27]='21:00';
-												echo form_dropdown('HoraFDropdown', $time, set_value('HoraFDropdown') );
-											?>
-										</div>
+								<div class="row">
+									<div class="six columns">
+						                <label for="HoraFAltDropdown">Hora de Term</label>
+										<?php 
+											foreach ($DataHorarios as $index => $value) {
+												$time[$index]=substr($value,0,-6);							
+											}
+											$time[27]='21:00';
+											echo form_dropdown('HoraFDropdown', $time, set_value('HoraFDropdown') );
+										?>
 									</div>
-								</div><hr><!--twelve -->	
+								</div>
+							</div><hr><!--twelve -->	
 								
 						</div> <!--twelve columns-->
 						</div>	<!--row-->
@@ -245,23 +245,24 @@
 						
 						<div class="row">
 							<div class="twelve columns">
-							<label>Días</label> <!--¡CAMBIA EL VALUE PARA FUNCIONAMIENTO DE LA BD -->
-							<div class="six columns">
-						      <label for="checkboxLunes"><input type="checkbox" id="checkboxLunes" name="checkboxes[]" style='display: none;' value="1"><span class="custom checkbox"></span> Lunes</label>
-						      <label for="checkboxMartes"><input type="checkbox" id="checkboxMartes" name="checkboxes[]" style='display: none;' value="2"><span class="custom checkbox"></span> Martes</label>
-						      <label for="checkboxMiercoles"><input type="checkbox" id="checkboxMiercoles" name="checkboxes[]" style='display: none;' value="3"><span class="custom checkbox"></span> Miércoles</label>
+								<label for="dias">Días</label>
+								<?php 
+									print_r(set_value('checkboxes[]'));
+									foreach ($dias as $value) {
+								?>
+										<div class="two columns">
+										<label><?= $value['nombredia'] ?></label>
+										<?php echo form_checkbox('checkboxes[]', $value['iddias']); ?>
+										</div>
+								<?php }	?>
+						  		<?php echo form_error('checkboxes[]'); ?>
+								<div class="one columns"></div>
 							</div>
-							<div class="six columns">
-								<label for="checkboxJueves"><input type="checkbox" id="checkboxJueves" name="checkboxes[]" style='display: none;' value="4"><span class="custom checkbox"></span> Jueves</label>
-						      	<label for="checkboxViernes"><input type="checkbox" id="checkboxViernes" name="checkboxes[]" style='display: none;' value="5"><span class="custom checkbox"></span> Viernes</label>
-								
-							</div>
-					  		<?php echo form_error('checkboxes[]'); ?>
-							</div>
+
 						</div> <hr>
 						
 						<div class="four columns"></div>						
-						<input type="submit" id="AgregarHorarioBtn" class="button normal four columns" value="Agregar" />
+							<input type="submit" id="AgregarHorarioBtn" class="button normal four columns" value="Agregar" />
 						<div class="four columns"></div>						
 
 				</fieldset>

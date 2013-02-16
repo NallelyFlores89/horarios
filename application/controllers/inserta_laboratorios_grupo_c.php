@@ -14,9 +14,9 @@
 		function index(){          //Este controlador sirve para llenar o vaciar la tabla de laboratorios_Grupo
 			
 			for ($sem=1; $sem <=13; $sem++) {
-				for ($dias=1; $dias<=5; $dias++) {
-					 for ($hora=1; $hora <=27; $hora++) { 
-						$this->Llena_tabla_laboratorios_grupo_m->inserta_laboratorios_grupo(219, $sem, $dias, 1);
+				for ($dias=3; $dias<=3; $dias++) {
+					 for ($hora=24; $hora <=24; $hora++) { 
+						$this->Llena_tabla_laboratorios_grupo_m->inserta_laboratorios_grupo(220, $sem, $dias, $hora);
 					 }
 				}
 			}

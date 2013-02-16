@@ -30,6 +30,7 @@
 			<ul class="breadcrumbs">
 			  <li><a id="InicioAdminBtn" href="<?=base_url()?>index.php/inicio_admin_c/">Inicio</a></li>
 			  <li><a id="AgregarHorarioBtn" class="AgregarHorarioBtn">Agregar Horario</a></li>
+			  <li><a id="AgregarHorarioBtn" class="AgregarHorarioBtn">Horario esp</a></li>
 			  <li><a id="vaciarHorariosBtn" class="vaciarHorariosBtn">Vaciar Horarios</a></li>
 			  <li><a id="IrRecursosAdminBtn" href="<?=base_url()?>index.php/recursos_admin_c">Recursos</a></li>
 			  <li><a id="AdministracionBtn" href="<?=base_url()?>index.php/administracion_c">UEA's-Profesor</a></li>

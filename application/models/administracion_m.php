@@ -10,7 +10,7 @@
 		}
 
 		function obtenListaUeaProfesorGrupo(){
-			$this->db->select('grupo.siglas, profesores.nombre, profesores.numempleado, profesores.correo, uea.nombreuea, uea.clave, grupo.grupo,idlaboratorios');
+			$this->db->select('grupo.idgrupo,grupo.siglas, profesores.idprofesores, profesores.nombre, profesores.numempleado, profesores.correo, uea.nombreuea, uea.iduea, uea.clave, grupo.grupo,idlaboratorios');
 			$this->db->from('grupo'); 
 			$this->db->join('profesores', 'grupo.profesores_idprofesores=profesores.idprofesores');
 			$this->db->join('uea','grupo.uea_iduea=uea.iduea');
@@ -71,11 +71,11 @@
 			}			
 		} //Fin obtenLaboratorios				
 
-		function obtenIdProf($numEmp){
+		function obtenIdProf($nombre){
 				
 			$this->db->select('idprofesores');
 			$this->db->from('profesores');
-			$this->db->where('numempleado', $numEmp);
+			$this->db->where('nombre', $nombre);
 
 			$ids=$this->db->get(); 
 			if(($ids->num_rows())>0){
@@ -89,47 +89,11 @@
 			}			
 		} //Fin obtenLaboratorios
 
-		function obtenIdUea($clave){
-				
-			$this->db->select('iduea');
-			$this->db->from('uea');
-			$this->db->where('clave', $clave);
-
-			$ids=$this->db->get(); 
-			if(($ids->num_rows())>0){
-				foreach ($ids->result_array() as $value) {
-					$id[1] = $value['iduea']; 
-				 }
-			
-				return($id[1]);
-			}else{
-				return(-1);
-			}			
-		} //Fin obtenIdUea
-				
-		function obtenIdGrupo($grupo){
-			$this->db->select('idgrupo');
-			$this->db->from('grupo');
-			$this->db->where('grupo', $grupo);
-			
-			$grupo=$this->db->get(); 
-			if(($grupo->num_rows())>0){ 
-				foreach ($grupo->result_array() as $value) {
-					$idgrupo[1] = $value['idgrupo']; 
-				 }
-			
-				return($idgrupo[1]);
-			}else{
-				return(-1);
-			}						
-						
-		}
-		
 		function obtenDatosUEA($clave){
 				
 			$this->db->select('nombreuea, clave');
 			$this->db->from('uea');
-			$this->db->where('clave', $clave);
+			$this->db->where('iduea', $clave);
 
 			$uea=$this->db->get(); 
 			if(($uea->num_rows())>0){ 
@@ -143,23 +107,40 @@
 			}			
 		} //Fin obtenLaboratorios	
 		
-		function editaProfesor($id, $nuevo_nombre, $num_emp, $correo){
-			$datos= Array(
-				'nombre'=>$nuevo_nombre,
-				'numempleado' => $num_emp,
-				'correo' => $correo
-			);
+		function obtenDatosGrupo($siglas){
+			$this->db->select('grupo.siglas, profesores.idprofesores, profesores.nombre, profesores.numempleado, profesores.correo, uea.nombreuea, uea.iduea, uea.clave, grupo.grupo,idlaboratorios');
+			$this->db->from('grupo'); 
+			$this->db->join('profesores', 'grupo.profesores_idprofesores=profesores.idprofesores');
+			$this->db->join('uea','grupo.uea_iduea=uea.iduea');
+			$this->db->join('laboratorios_grupo','grupo.idgrupo=laboratorios_grupo.idgrupo');
+			$this->db->where('grupo.siglas',$siglas);
+							
+			$this->db->distinct(); //Para que no se repitan los datos
+			$listaUeaProfesorGrupo=$this->db->get();
 			
-			$this->db->where('idprofesores',$id);
-			$this->db->update('profesores', $datos); 	
+			if(($listaUeaProfesorGrupo->num_rows())>0){
+				$indice=1;
+				
+				foreach ($listaUeaProfesorGrupo->result_array() as $value) {
+					$arregloUPG[$indice] = $value;
+					$indice=$indice+1;
+				}
+				return ($arregloUPG);
+			}else{
+				return -1;
+			}
 			
 		}
 		
-		function editaUEA($clave, $nuevo_nombre){
+		function editaUEA($uea, $nuevo_nombre, $clave){
+			
 			$datos=Array(
-				'nombreuea' => $nuevo_nombre
+				'nombreuea' => $nuevo_nombre,
+				'clave' => $clave,
 			);
-			$this->db->where('clave', $clave);
+			
+			print_r ($datos);
+			$this->db->where('nombreuea', $uea);
 			$this->db->update('uea', $datos); 	
 		}
 		
@@ -182,20 +163,34 @@
 			}			
 			
 		}
-		
-		function editaGrupo($grupo, $nuevo_nombre){
-			$datos=Array(
-				'grupo' => $nuevo_nombre
-			);
-			$this->db->where('grupo', $grupo);
-			$this->db->update('grupo', $datos); 			
-		}
 
-		function editaSiglas($grupo, $nuevo_siglas){
+		function obtenDatosLaboratoriosGrupo2($idgrupo, $idlab){
+			$this->db->select('semanas_idsemanas, dias_iddias, horarios_idhorarios');
+			$this->db->from('laboratorios_grupo');
+			$this->db->where('idgrupo', $idgrupo);
+			$this->db->where('idlaboratorios', $idlab);
+
+			$res=$this->db->get(); 
+			if(($res->num_rows())>0){ 
+				$indice=1;
+				foreach ($res->result_array() as $value) {
+					$resultado[$indice] = $value; 
+					$indice++;
+				 }
+			
+				return($resultado);
+			}else{
+				return(-1);
+			}			
+			
+		}		
+		function editaGrupo($siglas, $nuevo_nombre, $nuevas_siglas){
 			$datos=Array(
-				'siglas' => $nuevo_siglas
+				'grupo' => $nuevo_nombre,
+				'siglas' => $nuevas_siglas,
 			);
-			$this->db->where('grupo', $grupo);
+			
+			$this->db->where('siglas', $siglas);
 			$this->db->update('grupo', $datos); 			
 		}
 
@@ -264,6 +259,15 @@
 			
 			
 		}
+		
+		function cambiaProfesor($idgrupo, $idprof){
+			$datos = Array(
+				'profesores_idprofesores' => $idprof
+			);
+			
+			$this->db->where('idgrupo', $idgrupo);
+			$this->db->update('grupo', $datos); 
+		}
 						
 		function obtenGruposxProf($idprofesor){
 			$this->db->select('idgrupo');
@@ -293,8 +297,6 @@
 			$this->db->where('horarios_idhorarios', $idhora);
 			$this->db->update('laboratorios_grupo', $datos); 			
 		}		
-
-		
 	
 	} //Fin de la clase
 

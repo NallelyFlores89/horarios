@@ -30,7 +30,7 @@
 					$Data['$DataU105_'.$sem.'_'.$dia]=$this->Inicio_m->ueas(105,$sem,$dia);
 				}
 			}
-
+			 
 			for ($sem=1; $sem <= 13 ; $sem++) { 
 				for ($dia=1; $dia <=5 ; $dia++) { 
 					$Data['$DataU106_'.$sem.'_'.$dia]=$this->Inicio_m->ueas(106,$sem,$dia);

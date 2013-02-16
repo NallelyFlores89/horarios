@@ -64,6 +64,23 @@
 			
 		} //fin Obtenhorarios	
 		
+		function ObtenDias(){
+			$this->db->select('iddias, nombredia');
+			$this->db->from('dias');
+			$lHorarios=$this->db->get();
+
+			if(($lHorarios->num_rows())>0){
+				$indice=1;
+				foreach ($lHorarios->result_array() as $value) {
+					$arregloHorarios[$indice] = $value;
+					$indice++;
+				}
+				return ($arregloHorarios);
+			}else{
+				return 0;
+			}//fin del else			
+		}
+		
 		function ObtenHora($id){
 			$this->db->select('hora');
 			$this->db->from('horarios');

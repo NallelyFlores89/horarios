@@ -21,7 +21,7 @@
 							<?php }} ?>
 						</dl>
 					</div>
-					
+		
 					<ul class="tabs-content">
 						
 						<?php 
