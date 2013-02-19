@@ -10,10 +10,11 @@
 		}
 
 		function obtenListaUeaProfesorGrupo(){
-			$this->db->select('grupo.idgrupo,grupo.siglas, profesores.idprofesores, profesores.nombre, profesores.numempleado, profesores.correo, uea.nombreuea, uea.iduea, uea.clave, grupo.grupo,idlaboratorios');
+			$this->db->select('grupo.idgrupo,grupo.siglas, profesores.idprofesores, divisiones.nombredivision, profesores.nombre, profesores.numempleado, profesores.correo, uea.nombreuea, uea.iduea, uea.divisiones_iddivisiones, uea.clave, grupo.grupo,idlaboratorios');
 			$this->db->from('grupo'); 
 			$this->db->join('profesores', 'grupo.profesores_idprofesores=profesores.idprofesores');
 			$this->db->join('uea','grupo.uea_iduea=uea.iduea');
+			$this->db->join('divisiones','divisiones_iddivisiones=divisiones.iddivisiones');
 			$this->db->join('laboratorios_grupo','grupo.idgrupo=laboratorios_grupo.idgrupo');
 							
 			$this->db->distinct(); //Para que no se repitan los datos
@@ -52,7 +53,25 @@
 			}			
 		} //Fin obtenLaboratorios
 
+		function obtenDiv(){
 				
+			$this->db->select('iddivisiones, nombredivision');
+			$this->db->from('divisiones');
+
+			$labos=$this->db->get(); 
+			$indice=1;
+			if(($labos->num_rows())>0){ 
+				foreach ($labos->result_array() as $value) {
+					$laboratorios[$indice] = $value; 
+					$indice++;
+				 }
+			
+				return($laboratorios);
+			}else{
+				return(-1);
+			}			
+		} //Fin obtenLaboratorios				
+
 		function obtenDatosProfesor($numEmp){
 				
 			$this->db->select('nombre, numempleado, correo');
@@ -108,7 +127,7 @@
 		} //Fin obtenLaboratorios	
 		
 		function obtenDatosGrupo($siglas){
-			$this->db->select('grupo.siglas, profesores.idprofesores, profesores.nombre, profesores.numempleado, profesores.correo, uea.nombreuea, uea.iduea, uea.clave, grupo.grupo,idlaboratorios');
+			$this->db->select('grupo.siglas, profesores.idprofesores, profesores.nombre, profesores.numempleado, profesores.correo, uea.nombreuea, uea.iduea, uea.clave, grupo.grupo,idlaboratorios, uea.divisiones_iddivisiones');
 			$this->db->from('grupo'); 
 			$this->db->join('profesores', 'grupo.profesores_idprofesores=profesores.idprofesores');
 			$this->db->join('uea','grupo.uea_iduea=uea.iduea');

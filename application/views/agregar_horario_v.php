@@ -78,13 +78,13 @@
 														}
 													}
 												}
-											})
-										}
-									})
-								})
-							}
-						});
-					},
+											}) 
+										} //Fin del success data2
+									}) //Fin del ajax
+								}) //Fin del change
+							} //Fin del success data
+						}); //Fin del ajax
+					}, //Fin del source
 				minLength: 1
 			});
 
@@ -122,20 +122,33 @@
 														$("#claveInput").val(data)
 														$("#claveInput").attr('disabled','')
 													}
-												}
-				
+												}				
 											}
-											
 										})
-									}		
-								})
-							})
-						}
-					});
-				},
+										
+										$.ajax({
+											url: "<?php echo site_url('agregar_horario_c/busca_division'); ?>",
+											data: { idUea: $("#ueaId").val() },
+											dataType: "json",
+											type: "POST",
+											success:function(data){
+												if(data == -1){
+ 													alert("Uea no registrada")
+ 												}else{
+ 													$('#divisionesDropdown').val(data)
+												}				
+											}
+										})
+		
+									} //Fin del success		
+								}) //Fin del ajax
+							}) //Fin del change
+						} //Fin del success
+					}); //Fin del ajax
+				}, //Fin del source
 				minLength: 1
-			});		
-		});
+			});	 //Fin de auto complete	
+		}); //Fin del ready function
 
 	</script>
 
@@ -147,12 +160,12 @@
 				<br><br>
 				<h2>Agregar horario</h2><br>
 				<p class="instrucciones">Por favor, llene el formulario</p>
-
+				<p class="instrucciones">Los campos con * son obligatorios</p>
 				<fieldset >
 					<form class="custom" action="" method="post">
 						<div class="row">
 							<div class="nine columns">
-								<label for="nombreInput">Nombre del profesor</label>
+								<label for="nombreInput">*Nombre del profesor</label>
 					  			<input type="text" id="nombreInput" name="nombreInput" value="<?php echo set_value('nombreInput'); ?>"/>
 						  		<input type="hidden" id="id_prof">
 						  		<?php echo form_error('nombreInput'); ?>
@@ -171,7 +184,7 @@
 							
 						<div class="row">
 							<div class="six columns">
-								<label for="ueaInput">Nombre de la UEA</label>
+								<label for="ueaInput">*Nombre de la UEA</label>
 					  			<input type="text" id="ueaInput" name="ueaInput" value="<?php echo set_value('ueaInput'); ?>"/>
 					  			<input type="hidden" id="ueaId" name="ueaId" />
 						  		<?php echo form_error('ueaInput'); ?>
@@ -185,7 +198,7 @@
 						  		<input type="text" id="grupoInput" name="grupoInput" value="<?php echo set_value('grupoInput'); ?>"/>
 						  	</div>
 							<div class="two columns">
-						  		<label for="siglasInput">Siglas</label>
+						  		<label for="siglasInput">*Siglas</label>
 						  		<input type="text" id="siglasInput" name="siglasInput" value="<?php echo set_value('siglasInput'); ?>"/>
 						  		<?php echo form_error('siglasInput'); ?>
 
@@ -197,7 +210,7 @@
 							<div class="row">
 						        <div class="six columns">
 						           	<label for="divisionesDropdown">Sección</label>
-										<?php echo form_dropdown('divisionesDropdown', $listaDivisiones['divisiones'], set_value('divisionesDropdown') ); ?>
+										<?php echo form_dropdown('divisionesDropdown', $listaDivisiones['divisiones'], set_value('divisionesDropdown'), 'id="divisionesDropdown"' ); ?>
 								</div>
 		
 				                <div class="six columns">
@@ -206,7 +219,10 @@
 											foreach ($DataLabos as $value) {
 												$labos[$value['idlaboratorios']]=$value['nombrelaboratorios'];
 											}
-											echo form_dropdown('laboratoriosDropdown', $labos, set_value('laboratoriosDropdown') );
+											$atributos=array(
+												'id' => 'divisionesDropdown',
+											);
+											echo form_dropdown('laboratoriosDropdown', $labos, set_value('laboratoriosDropdown'), 'id="laboratoriosDropdown"');
 									    ?>
 
 								</div>
@@ -245,14 +261,13 @@
 						
 						<div class="row">
 							<div class="twelve columns">
-								<label for="dias">Días</label>
+								<label for="dias">*Días</label>
 								<?php 
-									print_r(set_value('checkboxes[]'));
 									foreach ($dias as $value) {
 								?>
 										<div class="two columns">
 										<label><?= $value['nombredia'] ?></label>
-										<?php echo form_checkbox('checkboxes[]', $value['iddias']); ?>
+										<?php echo form_checkbox('checkboxes[]', $value['iddias'])?>
 										</div>
 								<?php }	?>
 						  		<?php echo form_error('checkboxes[]'); ?>

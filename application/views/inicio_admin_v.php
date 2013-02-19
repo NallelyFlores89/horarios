@@ -33,7 +33,7 @@
 			  <li><a id="AgregarHorarioBtn" class="AgregarHorarioBtn">Horario esp</a></li>
 			  <li><a id="vaciarHorariosBtn" class="vaciarHorariosBtn">Vaciar Horarios</a></li>
 			  <li><a id="IrRecursosAdminBtn" href="<?=base_url()?>index.php/recursos_admin_c">Recursos</a></li>
-			  <li><a id="AdministracionBtn" href="<?=base_url()?>index.php/administracion_c">UEA's-Profesor</a></li>
+			  <li><a id="AdministracionBtn" href="<?=base_url()?>index.php/administracion_c">UEA's</a></li>
 			  <li><a id="ProfesoresBtn" href="<?=base_url()?>index.php/profesores_c">Profesores</a></li>			  
 			  <li><a id="Administracion2Btn" href="<?=base_url()?>index.php/administracion2_c">Administración</a></li>
 			  <li><a href="<?=base_url()?>index.php/inicio_admin_c/do_logout">Salir</a></li>

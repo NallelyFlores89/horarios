@@ -238,6 +238,18 @@
 			else{
 				return -1;	
 			}
+	    }
+
+		function busca_division($options = array()){
+		    $this->db->select('divisiones_iddivisiones');
+		    $this->db->where('iduea', $options['keyword']);
+	   		$query = $this->db->get('uea');
+			if($query->num_rows()>0){
+				return $query->result();
+			}
+			else{
+				return -1;	
+			}
 	    }						
 	} //Fin de la clase
 ?>

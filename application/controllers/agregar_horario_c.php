@@ -63,11 +63,11 @@
 						'GrupoExiste' => $GrupoExiste,
 						'dias' => $dias
 				);
-				
+	
 				if($this->form_validation->run()){
 
 					//INSERTANDO DATOS EN BD
-					
+
 					$idProf=$this->Agregar_horario_m->obtenerIdProfesor($_POST['nombreInput']); //Profesor
 					
 					if($idProf==-1){ //Si no existe el profesor en la base de datos, lo inserta
@@ -229,6 +229,22 @@
 				}else{
 					echo json_encode(-1);
 				}
+			}
+			
+			function busca_division(){
+				$term = $this->input->post('idUea',TRUE);
+				$rows = $this->Agregar_horario_m->busca_division(array('keyword' => $term));
+				$json_array = array();
+
+				if($rows != -1){
+					foreach ($rows as $row){
+						array_push($json_array, $row->divisiones_iddivisiones);
+					}			
+					echo json_encode($json_array);
+				}else{
+					echo json_encode(-1);
+				}				
+				
 			}
 																		
 			public function nombreInput_check($nombreInput){

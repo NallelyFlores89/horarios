@@ -58,7 +58,9 @@
 			if(! $this->session->userdata('validated')){
 				redirect('loguin_c');
 			}else{
-				$datos =$this->administracion_m->obtenDatosGrupo($siglas);
+				$datos['datos'] = $this->administracion_m->obtenDatosGrupo($siglas);
+				$datos['id_div'] =$datos['datos'][1]['divisiones_iddivisiones']; 
+				$datos['div'] = $this->administracion_m->obtenDiv();
 				$this->form_validation->set_rules('ueaInput', 'ueaInput', 'required');
 				$this->form_validation->set_rules('siglasInput', 'siglasInput', 'required');
 				
@@ -77,7 +79,7 @@
 			                window.close();</script>";
 			                
 				}else{
-					$this->load->view('admin_edita_v',$datos[1]);
+					$this->load->view('admin_edita_v',$datos);
 				}	
 			}
 		} //Fin función

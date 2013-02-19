@@ -27,7 +27,7 @@
 		<table class="responsive contentHorario">
 			<tr>
 				<th>Profesor</th><th>UEA</th><th>Clave</th><th>Siglas</th>
-				<th>Grupo</th><th>Lab</th><th colspan="6">Acciones</th>
+				<th>Grupo</th><th>Secc</th><th>Lab</th><th colspan="6">Acciones</th>
 			</tr>
 				<?php  //Cargando datos 
 					if($datosUPG==-1){
@@ -40,6 +40,7 @@
 							echo"<td>";print_r(strtoupper($valor['clave'])); echo"</td>";
 							echo"<td>";print_r(strtoupper($valor['siglas'])); echo"</td>";
 							echo"<td>";print_r(strtoupper($valor['grupo'])); echo"</td>";
+							echo"<td>";print_r(strtoupper($valor['nombredivision'])); echo"</td>";
 							echo"<td>";print_r($valor['idlaboratorios']); echo"</td>";
 						?>
 							<td><a href="#" onclick="ventanaEdita(<?=$valor['iduea'] ?>, '<?= $valor['siglas'] ?>')">Editar</a></td>

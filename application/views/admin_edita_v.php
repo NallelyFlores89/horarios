@@ -23,28 +23,41 @@
 				<fieldset >
 					<form class="custom" action="" method="post">
 						<div class="row">
-							<div class="twelve columns">
+							<div class="nine columns">
 						  		<label for="ueaInput">Nombre de la UEA</label>
-						  		<input type="text" id="ueaInput" name="ueaInput" value="<?= $nombreuea ?>"/>
+						  		<input type="text" id="ueaInput" name="ueaInput" value="<?= $datos[1]['nombreuea'] ?>"/>
 						  		<?php echo form_error('ueaInput'); ?>
 						  	</div>
 						 							  	
-							<div class="four columns">
+							<div class="three columns">
 						  		<label for="claveInput">Clave</label>
-						  		<input type="text" id="claveInput" name="claveInput" value="<?= $clave ?>"/>
+						  		<input type="text" id="claveInput" name="claveInput" value="<?= $datos[1]['clave'] ?>"/>
 						  	</div>
 
 							<div class="four columns">
 						  		<label for="siglasInput">Siglas</label>
-						  		<input type="text" id="siglasInput" name="siglasInput" value="<?= $siglas ?>"/>
+						  		<input type="text" id="siglasInput" name="siglasInput" value="<?= $datos[1]['siglas'] ?>"/>
 						  		<?php echo form_error('siglasInput'); ?>						 	
 						  	</div>
 						  							  	
 							<div class="four columns">
 						  		<label for="ueaInput">Grupo</label>
-						  		<input type="text" id="grupoInput" name="grupoInput" value="<?= $grupo ?>"/>
+						  		<input type="text" id="grupoInput" name="grupoInput" value="<?= $datos[1]['grupo'] ?>"/>
 						  		<?php echo form_error('grupoInput'); ?>
 						  	</div>
+
+						  	<div class="four columns">
+						  		<label for="laboratoriosDropdown">Sección</label>
+									<?php 
+										foreach ($div as $value) {
+											$labos[$value['iddivisiones']]=$value['nombredivision'];
+										}
+										echo form_dropdown('laboratoriosDropdown', $labos, $id_div);
+								    ?>
+						  		
+						  	</div>
+						  	
+						  	
 						</div>
 
 						<div class="four columns"></div>
