@@ -6,9 +6,9 @@
 			parent::__construct();
 			
 			$this->load->helper(array('html', 'url'));
-			$this->load->model('Solicitar_laboratorio_m'); //Cargando mi modelo
-			$this->load->model('Agregar_horario_m'); //Cargando mi modelo
-			$this->load->model('profesores_m'); //Cargando mi modelo
+			$this->load->model('Solicitar_laboratorio_m'); 
+			$this->load->model('Agregar_horario_m');
+			$this->load->model('profesores_m'); 
 									
 			$this->load->library('form_validation');
 			$this->form_validation->set_error_delimiters('<div class="error">', '</div>');
@@ -48,13 +48,13 @@
 				$this->form_validation->set_rules('laboratoriosDropdown', 'laboratoriosDropdown', '');	
 
 								
-				$this->form_validation->set_rules('nombreInput', 'nombreInput', 'callback_nombreInput_check');
-				$this->form_validation->set_rules('ueaInput', 'ueaInput', 'callback_ueaInput_check');
-				$this->form_validation->set_rules('siglasInput', 'siglasInput', 'callback_siglasInput_check');
+				$this->form_validation->set_rules('nombreInput', 'nombreInput', 'required');
+				$this->form_validation->set_rules('ueaInput', 'ueaInput', 'required');
+				$this->form_validation->set_rules('siglasInput', 'siglasInput', 'required');
 				$this->form_validation->set_rules('checkboxes[]', 'checkboxes', 'required');
+				
 				$this->form_validation->set_message('required','Debe seleccionar al menos un día');
-				
-				
+						
 				$datos=Array(  //Enviando datos a la vista
 						'listaDivisiones' => $divisiones,
 						'DataLabos' => $DataLabos,
@@ -135,7 +135,10 @@
 							window.opener.location.reload();
 			                window.close();</script>";
 					}else{
-						$this->load->view('agregar_horario_v', $datos);
+							$this->load->view('header');
+							$this->load->view('script');
+							$this->load->view('agregarHorarioForm', $datos);
+							$this->load->view('agregar_horario_v', $datos);
 						
 					} //Validation run
 				} //Login
@@ -246,36 +249,7 @@
 				}				
 				
 			}
-																		
-			public function nombreInput_check($nombreInput){
-					if($nombreInput==''){
-							$this->form_validation->set_message('nombreInput_check','Campo obligatorio. Por favor, introduce nombre');
-							return FALSE;
-						
-					}else{
-							return TRUE;
-					}
-			}
-	
-			public function ueaInput_check($ueaInput){
-					if($ueaInput==''){
-							$this->form_validation->set_message('ueaInput_check','Campo obligatorio');
-							return FALSE;
-						
-					}else{
-							return TRUE;
-					}
-			}
-	
-			public function siglasInput_check($siglasInput){
-					if($siglasInput==''){
-							$this->form_validation->set_message('siglasInput_check','Campo obligatorio');
-							return FALSE;
-						
-					}else{
-							return TRUE;
-					}
-			}
+																
 
 	
 	}//Fin de la clase

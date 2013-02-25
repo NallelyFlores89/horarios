@@ -26,7 +26,6 @@
 							<div class="nine columns">
 						  		<label for="ueaInput">Nombre de la UEA</label>
 						  		<input type="text" id="ueaInput" name="ueaInput" value="<?= $datos[1]['nombreuea'] ?>"/>
-						  		<?php echo form_error('ueaInput'); ?>
 						  	</div>
 						 							  	
 							<div class="three columns">
@@ -50,9 +49,9 @@
 						  		<label for="laboratoriosDropdown">Sección</label>
 									<?php 
 										foreach ($div as $value) {
-											$labos[$value['iddivisiones']]=$value['nombredivision'];
+											$div[$value['iddivisiones']]=$value['nombredivision'];
 										}
-										echo form_dropdown('laboratoriosDropdown', $labos, $id_div);
+										echo form_dropdown('division', $div, $id_div);
 								    ?>
 						  		
 						  	</div>

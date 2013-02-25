@@ -151,14 +151,14 @@
 			
 		}
 		
-		function editaUEA($uea, $nuevo_nombre, $clave){
+		function editaUEA($uea, $nuevo_nombre, $clave, $div){
 			
 			$datos=Array(
 				'nombreuea' => $nuevo_nombre,
 				'clave' => $clave,
+				'divisiones_iddivisiones' => $div
 			);
 			
-			print_r ($datos);
 			$this->db->where('nombreuea', $uea);
 			$this->db->update('uea', $datos); 	
 		}

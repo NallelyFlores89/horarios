@@ -99,42 +99,20 @@
 		}
 		
 		function obtenerSemana(){
-			$this->db->select('semana');
+			$this->db->select('idsemanas,semana');
 			$this->db->from('semanas');
 	
 			$semanas=$this->db->get(); 
 			$indice=1;
 			if(($semanas->num_rows())>0){
 				foreach ($semanas->result_array() as $value) {
-					$sem[$indice] = $value['semana']; 
+					$sem[$indice] = $value; 
 					$indice++;
 				 }
 			
 				return($sem);
 			}else{
 				return(0);
-			}			
-			
-		}
-		
-		function horarioOcupado($labo, $sem, $dia, $hora){ //Función que verifica si el horario a ocupar está disponible
-			
-			$this->db->select('idgrupo');
-			$this->db->from('laboratorios_grupo');
-			$this->db->where('idlaboratorios',$labo);
-			$this->db->where('semanas_idsemanas', $sem);			
-			$this->db->where('dias_iddias',$dia);			
-			$this->db->where('horarios_idhorarios',$hora);			
-			
-			$res=$this->db->get();
-			
-			if(($res->num_rows())>0){ //Si el horario ya está ocupado por otro grupo
-				foreach ($res->result_array() as $value) {
-					$ocupado[1]=$value['idgrupo'];
-				}
-				return $ocupado[1];
-			}else{
-				return -1;
 			}			
 			
 		}
@@ -158,25 +136,28 @@
 			}			
 		} //Fin obtenLaboratorios	
 		
-		function obtenerIdHora($HoraI){
-			$this->db->select('idhorarios');
-			$this->db->from('horarios');
-			$this->db->where('hora',$HoraI);
+		function horarioOcupado($labo, $sem, $dia, $hora){ //Función que verifica si el horario a ocupar está disponible
 			
-
-			$idHora=$this->db->get(); 
+			$this->db->select('idgrupo');
+			$this->db->from('laboratorios_grupo');
+			$this->db->where('idlaboratorios',$labo);
+			$this->db->where('semanas_idsemanas', $sem);			
+			$this->db->where('dias_iddias',$dia);			
+			$this->db->where('horarios_idhorarios',$hora);			
 			
-			if(($idHora->num_rows())>0){ 
-				foreach ($idHora->result_array() as $value) {
-					$idH[1] = $value['idhorarios']; 
-				 }
+			$res=$this->db->get();
 			
-				return($idH[1]);
+			if(($res->num_rows())>0){ //Si el horario ya está ocupado por otro grupo
+				foreach ($res->result_array() as $value) {
+					$ocupado[1]=$value['idgrupo'];
+				}
+				return $ocupado[1];
 			}else{
-				return(-1);
+				return -1;
 			}			
 			
-		}	
+		}			
+				
 				
 	} //Fin de la clase
 ?>

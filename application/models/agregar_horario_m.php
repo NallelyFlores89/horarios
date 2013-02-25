@@ -175,6 +175,7 @@
 				'uea_iduea' => $iduea,
 				'profesores_idprofesores' => $idprof,
 			);	
+			
 			$this->db->insert('grupo', $datos); //Inserta en la tabla grupo
 		}
 		

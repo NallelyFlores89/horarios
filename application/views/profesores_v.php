@@ -15,6 +15,7 @@
   	<script src="<?=base_url(); ?>statics/foundation/javascripts/modernizr.foundation.js"></script>
 	<script src="<?=base_url(); ?>statics/responsiveTable/responsive-tables.js"></script>
    	<script src="<?=base_url(); ?>statics/foundation/javascripts/marketing_docs.js"></script>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js" type="text/javascript"></script>
 	<script>
 		function ventanaEdita(id){
 			liga='<?= base_url(); ?>index.php/profesores_c/edita/'+id
@@ -32,6 +33,32 @@
 			window.open(liga, 'Agrega', 'status=1,width=420,height=520, resizable=0, scrollbars=1') 
 			return 0;
 		}
+		
+		$(document).ready(function(){
+			// Write on keyup event of keyword input element
+			$("#kwd_search").keyup(function(){
+				// When value of the input is not blank
+				if( $(this).val() != "")
+				{
+					// Show only matching TR, hide rest of them
+					$("#my-table tbody>tr").hide();
+					$("#my-table td:contains-ci('" + $(this).val() + "')").parent("tr").show();
+				}
+				else
+				{
+					// When there is no input or clean again, show everything back
+					$("#my-table tbody>tr").show();
+				}
+			});
+		});
+		// jQuery expression for case-insensitive filter
+		$.extend($.expr[":"], 
+		{
+		    "contains-ci": function(elem, i, match, array) 
+			{
+				return (elem.textContent || elem.innerText || $(elem).text() || "").toLowerCase().indexOf((match[3] || "").toLowerCase()) >= 0;
+			}
+		});
 	</script>
  
 </head>
@@ -41,7 +68,8 @@
 	<div class="row">
 	<div class="twelve columns">
 	<h3>Profesores-UEA</h3><br><br>
-		<table class="responsive contentHorario">
+		<label for="kwd_search">Búsqueda:</label> <input type="text" id="kwd_search" value=""/>
+		<table id="my-table" class="responsive contentHorario">
 			<tr>
 				<th>Profesor</th><th>N°. Empleado</th><th>Correo</th><th colspan="5">Acciones</th>
 			</tr>

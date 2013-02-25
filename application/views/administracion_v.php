@@ -4,7 +4,7 @@
 <head>
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width" />
-    <title>Laboratorios de Docencia - Administración</title>
+    <title>UEA's</title>
 	<link href='http://fonts.googleapis.com/css?family=Gafata' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="<?=base_url(); ?>statics/foundation/stylesheets/foundation.min.css">
   	<link rel="stylesheet" href="<?=base_url(); ?>statics/foundation/stylesheets/foundation.min.css">
@@ -22,9 +22,13 @@
 
 <body>
 	<div class="container">
-	<h3>UEA's</h3><br><br>
-
-		<table class="responsive contentHorario">
+	<div class="row">
+	<h3>UEA's</h3><hr>
+	<div class="twelve columns>">
+		<label for="kwd_search">Búsqueda:</label>
+		<input type="text" id="kwd_search" value=""/>
+	</div>
+		<table id="my-table" class="responsive contentHorario">
 			<tr>
 				<th>Profesor</th><th>UEA</th><th>Clave</th><th>Siglas</th>
 				<th>Grupo</th><th>Secc</th><th>Lab</th><th colspan="6">Acciones</th>
@@ -55,6 +59,7 @@
 					}								 
 				?>
 		</table> <!--TERMINA LA TABLA -->
+	</div>
  	</div> <!--container-->
 </body>
 </html>

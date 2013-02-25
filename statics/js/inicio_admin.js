@@ -13,6 +13,14 @@ $(document).ready(function(){
 		width:800,
 	}); 
 
+	$('.AgregarHorarioEspBtn').popupWindow({ 
+		windowURL:base+'index.php/agHorarioEsp_c', 
+		scrollbars:'1',
+		resizable:'0',
+		height:500,
+		width:800,
+	});
+	
 	$('.vaciarHorariosBtn').popupWindow({ 
 		windowURL:base+'index.php/vaciar_confirm_c', 
 		scrollbars:'1',

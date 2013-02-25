@@ -71,8 +71,8 @@
 	
 				if($this->form_validation->run()){
 					
-					$this->administracion_m->editaUEA($datos[1]['nombreuea'], $_POST['ueaInput'], $_POST['claveInput']);
-					$this->administracion_m->editaGrupo($datos[1]['siglas'],$_POST['grupoInput'], $_POST['siglasInput']);
+					$this->administracion_m->editaUEA($datos['datos'][1]['nombreuea'], $_POST['ueaInput'], $_POST['claveInput'], $_POST['division']);
+					$this->administracion_m->editaGrupo($datos['datos'][1]['siglas'],$_POST['grupoInput'], $_POST['siglasInput']);
 				
 					echo "<script languaje='javascript' type='text/javascript'>
 							window.opener.location.reload();
