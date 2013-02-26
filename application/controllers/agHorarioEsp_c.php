@@ -56,7 +56,7 @@
 				$this->form_validation->set_rules('siglasInput', 'siglasInput', 'required');
 				$this->form_validation->set_rules('checkboxes[]', 'checkboxes', 'required');
 
-				$this->form_validation->set_message('required','Debe seleccionar al menos un día');
+				$this->form_validation->set_message('required','<script>alert("Por favor, seleccione al menos un día")</script>');
 								
 				$datos=Array(  //Enviando datos a la vista
 						'listaDivisiones' => $divisiones,

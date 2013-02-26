@@ -11,7 +11,7 @@
 						<div class="row">
 							<div class="nine columns">
 								<label for="nombreInput">*Nombre del profesor</label>
-					  			<input type="text" id="nombreInput" name="nombreInput" value="<?php echo set_value('nombreInput'); ?>" required/>
+					  			<input type="text" id="nombreInput" name="nombreInput" value="<?php echo set_value('nombreInput'); ?>" required title="Necesito saber el nombre del profesor"/>
 						  		<input type="hidden" id="id_prof">
 						 	</div>
 						 	
@@ -28,7 +28,7 @@
 						<div class="row">
 							<div class="six columns">
 								<label for="ueaInput">*Nombre de la UEA</label>
-					  			<input type="text" id="ueaInput" name="ueaInput" value="<?php echo set_value('ueaInput'); ?>" required/>
+					  			<input type="text" id="ueaInput" name="ueaInput" value="<?php echo set_value('ueaInput'); ?>" required title="Necesito saber el nombre de la uea"/>
 					  			<input type="hidden" id="ueaId" name="ueaId" />
 						   	</div>
 						  	<div class="two columns">
@@ -41,7 +41,7 @@
 						  	</div>
 							<div class="two columns">
 						  		<label for="siglasInput">*Siglas</label>
-						  		<input type="text" id="siglasInput" name="siglasInput" value="<?php echo set_value('siglasInput'); ?>" required/>
+						  		<input type="text" id="siglasInput" name="siglasInput" value="<?php echo set_value('siglasInput'); ?>" required title="¿Las siglas que identificarán al grupo?"/>
 						  		<?php echo form_error('siglasInput'); ?>
 
 						  	</div>
