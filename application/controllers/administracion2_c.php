@@ -15,7 +15,7 @@
 	    function index(){
 	    	
 			if(! $this->session->userdata('validated')){
-				redirect('loguin_c');
+				redirect('loguin_c/index2/NULL/3');
 			}else{
 		    	$datos['usuarios'] = $this->administracion2_m->traeAdministradores();
 	

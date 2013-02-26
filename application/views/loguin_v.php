@@ -21,8 +21,9 @@
 				<br><br>
 				<p class="instrucciones">Introduzca sus datos para ingresar al sistema</p>
 				<fieldset>
-					<form action='<?php echo base_url();?>index.php/loguin_c/process' method='post' name='process'>
-						<?php if(! is_null($msg)) echo $msg;?>			
+					<form action='<?php echo base_url();?>index.php/loguin_c/process/<?=$pag?>' method='post' name='process'>
+						<?php if(! is_null($msg) AND $msg != 'NULL')
+							 echo $msg;?>			
 						<label for="usuarioInput">Usuario</label>
 				  		<input type="text" id="usuarioInput" name="usuarioInput" />
 					  

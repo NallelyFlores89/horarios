@@ -15,7 +15,7 @@
 		function index()	{           //Cargamos vista
 			
 			if(! $this->session->userdata('validated')){
-				redirect('loguin_c');
+				redirect('loguin_c/index2/NULL/8');
 			}else{
 				$DataRecursos105=$this->Recursos_m->obtenRecursos(105); //Obteniendo mis datos
 				$DataRecursos106=$this->Recursos_m->obtenRecursos(106); //Obteniendo mis datos
@@ -34,6 +34,10 @@
 		} //Fin de Recursos
 		
 		function agregar_Recursos()	{           //Cargamos vista
+		
+		if(! $this->session->userdata('validated')){
+				redirect('loguin_c/index2/NULL/9');
+		}else{
 
 			$this->form_validation->set_rules('recursoInput', 'recursoInput', 'required');
 			$this->form_validation->set_rules('checkboxes[]', 'checkboxes', 'required');
@@ -73,10 +77,14 @@
 			}else{
 				$this->load->view('agregar_recurso_v');
 			}
+		}
 		
 		} //Fin de agregarRecursos
 		
 		function eliminar_Recurso($idrecurso, $idlab)	{           //Cargamos vista
+			if(! $this->session->userdata('validated')){
+				redirect('loguin_c/index2/NULL/8');
+			}else{
 				if($_POST != NULL){
 					$this->Recursos_m->elimina_laboratorios_has_recursos($idrecurso, $idlab);
 					echo "<script languaje='javascript' type='text/javascript'>
@@ -84,10 +92,14 @@
 			            window.close();</script>";
 				}
 				$this->load->view('eliminar_recurso_v');
+			}
 
 		} //Fin función Eliminar_Recurso
 
 		function editar_Recurso($idrecurso)	{           //Cargamos vista
+			if(! $this->session->userdata('validated')){
+				redirect('loguin_c/index2/NULL/8');
+			}else{
 				if($_POST != NULL){
 					$this->Recursos_m->edita_recurso($idrecurso,$_POST['recursoInput']);
 					echo "<script languaje='javascript' type='text/javascript'>
@@ -95,11 +107,13 @@
 			            window.close();</script>";
 				}
 				$this->load->view('editar_recurso_v');
-
+			}
 		} //Fin función Eliminar_Recurso
 		
 		function vaciar_Recursos()	{           //Cargamos vista
-		
+			if(! $this->session->userdata('validated')){
+				redirect('loguin_c/index2/NULL/10');
+			}else{		
 				$this->form_validation->set_rules('checkboxes2[]', 'checkboxes2', 'required');
 				$this->form_validation->set_message('required','Escoja al menos un laboratorio');
 				
@@ -114,6 +128,7 @@
 				}else{
 					$this->load->view('vaciar_recursos_v');
 				}
+			}
 		}
 	}//Fin de la clase
 ?>

@@ -15,7 +15,7 @@
 
 	    function index(){
 	    	if(! $this->session->userdata('validated')){
-				redirect('loguin_c');
+				redirect('loguin_c/index2/NULL/2');
 			}else{
 				$data['datosUPG']=$this->administracion_m->obtenListaUeaProfesorGrupo();
 		        $this->load->view('administracion_v', $data);
@@ -25,7 +25,7 @@
 
 		function elimina_grupo($idgrupo){
 			if(! $this->session->userdata('validated')){
-				redirect('loguin_c');
+				redirect('loguin_c/index2/NULL/2');
 			}else{				
 				if($_POST != NULL){
 					$this->administracion_m->eliminaGrupo($idgrupo);
@@ -40,7 +40,7 @@
 			
 		function elimina_uea($iduea){
 			if(! $this->session->userdata('validated')){
-				redirect('loguin_c');
+				redirect('loguin_c/index2/NULL/2');
 			}else{
 				if($_POST != NULL){
 					$this->administracion_m->eliminaUEA($iduea);
@@ -56,7 +56,7 @@
 
 		function edita($iduea, $siglas){
 			if(! $this->session->userdata('validated')){
-				redirect('loguin_c');
+				redirect('loguin_c/index2/NULL/2');
 			}else{
 				$datos['datos'] = $this->administracion_m->obtenDatosGrupo($siglas);
 				$datos['id_div'] =$datos['datos'][1]['divisiones_iddivisiones']; 
@@ -86,7 +86,7 @@
 		
 		function cambia_labo($idgrupo, $idlab){
 			if(! $this->session->userdata('validated')){
-				redirect('loguin_c');
+				redirect('loguin_c/index2/NULL/2');
 			}else{
 				$datos['laboratorios']=$this->administracion_m->obtenLaboratorios();
 				$datos['idlab'] = $idlab;
@@ -126,7 +126,7 @@
 		function cambiaProfe($idgrupo, $idprofesor){
 			
 			if(! $this->session->userdata('validated')){
-				redirect('loguin_c');
+				redirect('loguin_c/index2/NULL/2');
 			}else{
 				$datos['profesor'] = $this->profesores_m->obtenerInfoProfesorId($idprofesor);
 				$this->form_validation->set_rules('profesor', 'profesor', 'required');
@@ -161,7 +161,7 @@
 		
 		function cambiaHora($idgrupo, $siglas, $idlab){
 			if(! $this->session->userdata('validated')){
-				redirect('loguin_c');
+				redirect('loguin_c/index2/NULL/2');
 			}else{
 				
 				$datos['horarios'] = $this->solicitar_laboratorio_m->Obtenhorarios();

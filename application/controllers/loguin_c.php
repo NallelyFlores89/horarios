@@ -13,12 +13,17 @@
 
     function index( $msg = NULL ){
  		$data['msg'] = $msg;
+		$data['pag'] = 1;
         $this->load->view('loguin_v', $data);
     }
-	
-	
-	 function process(){
-      
+
+    function index2( $msg = NULL, $pag){
+ 		$data['msg'] = $msg;
+		$data['pag'] = $pag;
+        $this->load->view('loguin_v', $data);
+    }	
+
+	 function process($pag){
         $result = $this->loguin_model->validate();// Validando al usuario         
 		
 		if(! $result){ 
@@ -26,7 +31,61 @@
 			$this->index($msg);
 			
         }else{
-            redirect('inicio_admin_c'); //Cargando página de administrador
+        	switch ($pag) {
+				case '1':
+					redirect('inicio_admin_c');
+					break;
+				
+				case '2':
+					redirect('administracion_c');
+					break;
+					
+				case '3':
+					redirect('administracion2_c');
+					break;
+
+				case '4':
+					redirect('agHorarioEsp_c');
+					break;
+					
+				case '5':
+					redirect('agregar_horario_c');
+					break;
+					
+				case '6':
+					redirect('profesores_c');
+					break;
+
+				case '7':
+					redirect('profesores_c/agrega');
+					break;
+					
+				case '8':
+					redirect('recursos_admin_c');
+					break;
+
+				case '9':
+					redirect('recursos_admin_c/agregar_recursos');
+					break;
+
+				case '10':
+					redirect('recursos_admin_c/vaciar_recursos');
+					break;
+
+				case '11':
+					redirect('');
+					break;																		
+																						
+				case '12':
+					redirect('');
+					break;																		
+
+				case '13':
+					redirect('');
+					break;																		
+
+			}
+            // redirect('inicio_admin_c'); //Cargando página de administrador        
         }        
     }
 

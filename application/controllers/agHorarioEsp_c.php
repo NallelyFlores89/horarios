@@ -17,7 +17,7 @@
 		function index()	{           //Cargamos vista
 			
 			if(! $this->session->userdata('validated')){
-				redirect('loguin_c');
+				redirect('loguin_c/index2/NULL/4');
 			}else{
 				$GrupoExiste=0;
 				

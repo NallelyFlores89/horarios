@@ -14,7 +14,7 @@
 
 	    function index(){
 	    	if(! $this->session->userdata('validated')){
-				redirect('loguin_c');
+				redirect('loguin_c/index2/NULL/6');
 			}else{
 				$data['datosProf']=$this->profesores_m->obtenerInfoProfesor();
 		        $this->load->view('profesores_v', $data);
@@ -23,7 +23,7 @@
 		
 		function elimina($id){
 			if(! $this->session->userdata('validated')){
-				redirect('profesores_c/elimina');
+				redirect('loguin_c/index2/NULL/6');
 			}else{				
 				if($_POST != NULL){
 					$idprof=$this->administracion_m->obtenIdProf($id);
@@ -49,7 +49,7 @@
 		
 		function edita($id){
 			if(! $this->session->userdata('validated')){
-				redirect('profesores_c/edita');
+				redirect('loguin_c/index2/NULL/6');
 			}else{
 				$data['datosProf']=$this->profesores_m->obtenerInfoProfesorId($id);
 								
@@ -75,7 +75,7 @@
 		
 		function agrega(){
 			if(! $this->session->userdata('validated')){
-				redirect('loguin_c');
+				redirect('loguin_c/index2/NULL/7');
 			}else{
 				
 				$this->form_validation->set_rules('nombreInput', 'nombreInput', 'required');
