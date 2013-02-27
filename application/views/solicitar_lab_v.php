@@ -26,14 +26,12 @@
 						<div class="row">
 							<div class="eight columns">
 								<label for="nombreInput">* Nombre del titular</label>
-					  			<input type="text" id="nombreInput" name="nombreInput" value="<?php echo set_value('nombreInput'); ?>"/>
-						  		<?php echo form_error('nombreInput'); ?>
-
+					  			<input type="text" id="nombreInput" name="nombreInput" value="<?php echo set_value('nombreInput'); ?>"  required alt="Necesito saber el nombre del profesor"/>
 						 	</div>
 						 	
 							<div class="four columns">
 								<label for="numInput"> No. Empleado</label>
-					  			<input type="text" id="numInput" name="numInput" value="<?php echo set_value('numInput'); ?>"/>
+					  			<input type="text" id="numInput" name="numInput" value="<?php echo set_value('numInput'); ?>"  pattern="[0-9]+" title="Sólo números"/>
 
 						 	</div>						 	
 						</div><hr>
@@ -41,15 +39,13 @@
 						<div class="row">
 							<div class="twelve columns">
 								<label for="correoInput">* Correo electrónico (xanum.uam.mx)</label>
-						  		<input type="email" id="correoInput" name="correoInput" pattern="([a-zA-Z0-9]+)@xanum.uam.mx" value="<?php echo set_value('correoInput'); ?>"/>
-						  		<?php echo form_error('correoInput'); ?>
+						  		<input type="email" id="correoInput" name="correoInput" pattern="([a-zA-Z0-9]+)@xanum.uam.mx" value="<?php echo set_value('correoInput'); ?>" required title="El correo debe ser @xanum.uam.mx"/>
 						 	</div>
 						 </div><hr>	
 						<div class="row">
 							<div class="eight columns">
 						  		<label for="ueaInput">* Nombre de la UEA</label>
-						  		<input type="text" id="ueaInput" name="ueaInput" value="<?php echo set_value('ueaInput'); ?>"/>
-						  		<?php echo form_error('ueaInput'); ?>
+						  		<input type="text" id="ueaInput" name="ueaInput" value="<?php echo set_value('ueaInput'); ?>" required title="Necesito el nombre de la uea"/>
 
 						  	</div>
 						  	
@@ -123,22 +119,35 @@
 													echo form_dropdown('HoraFDropdown', $time, set_value('HoraFDropdown') );
 												?>
 										</div>
-										<?php echo form_error('HoraFDropdown'); ?>
-
 									</div>
 									
 									<div class="twelve">
 									<div class="row>">
 						                <div class="six columns">
 							                <label for="SemIDropdown">Semana de inicio</label>
-											<?php echo form_dropdown('SemIDropdown', $semanas, set_value('SemIDropdown') ); ?>
+							
+											<?php
+												$indice=1;
+												foreach ($semanas as $value) {
+													$sem[$indice]=$value['semana'];
+													$indice++;
+												}
+																
+											 	echo form_dropdown('SemIDropdown', $sem, set_value('SemIDropdown') ); ?>
 										</div>
 									</div>
 									
 									<div class="row">
 										<div class="six columns">
 							                <label for="SemFDropdown">Semana Final</label>
-											<?php echo form_dropdown('SemFDropdown', $semanas, set_value('SemFDropdown') ); ?>
+											<?php
+																								$indice=1;
+												foreach ($semanas as $value) {
+													$sem[$indice]=$value['semana'];
+													$indice++;
+												}
+												
+												echo form_dropdown('SemFDropdown', $sem, set_value('SemFDropdown') ); ?>
 										</div>
 									</div>
 								</div><hr>

@@ -129,7 +129,12 @@
 				}, //Fin del source
 				minLength: 1
 			});	 //Fin de auto complete	
+			
+			// setTimeout("alert('Tu sesión ha expirado. Recarga la página y vuelve a loguearte para seguir trabajando')",7199);	
 		}); //Fin del ready function
+		
+
+		
 
 	</script>
 </head>

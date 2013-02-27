@@ -137,7 +137,6 @@
 		} //Fin obtenLaboratorios	
 		
 		function horarioOcupado($labo, $sem, $dia, $hora){ //Función que verifica si el horario a ocupar está disponible
-			
 			$this->db->select('idgrupo');
 			$this->db->from('laboratorios_grupo');
 			$this->db->where('idlaboratorios',$labo);

@@ -9,7 +9,7 @@
 			$this->load->model('Solicitar_laboratorio_m'); 
 			$this->load->model('Agregar_horario_m');
 			$this->load->model('profesores_m'); 
-									
+			$this->load->library('session');									
 			$this->load->library('form_validation');
 			$this->form_validation->set_error_delimiters('<div class="error">', '</div>');
 		}

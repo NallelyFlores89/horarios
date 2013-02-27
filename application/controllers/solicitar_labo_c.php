@@ -32,12 +32,13 @@
 			
 
 			/**Validación del formulario**/			
-			$this->form_validation->set_rules('nombreInput', 'nombreInput', 'callback_nombreInput_check');
+			$this->form_validation->set_rules('nombreInput', 'nombreInput', 'required');
 			$this->form_validation->set_rules('checkboxes[]', 'checkboxes', 'required');
-			$this->form_validation->set_message('required','Debe seleccionar al menos un día');
-			$this->form_validation->set_rules('correoInput', 'correoInput', 'callback_correoInput_check');
-			$this->form_validation->set_rules('ueaInput', 'ueaInput', 'callback_ueaInput_check');
+			$this->form_validation->set_rules('correoInput', 'correoInput', 'required');
+			$this->form_validation->set_rules('ueaInput', 'ueaInput', 'required');
 			
+			$this->form_validation->set_message('required','<script>alert("Por favor, seleccione al menos un día")</script>');
+
 			$this->form_validation->set_rules('claveInput', 'claveInput', '');
 			$this->form_validation->set_rules('grupoInput', 'grupoInput', '');
 			$this->form_validation->set_rules('numInput', 'numInput', '');
@@ -53,7 +54,6 @@
 
 			
 			if($this->form_validation->run()){
-					
 				$divi = $this->Solicitar_laboratorio_m->obtenDivision($_POST['divisionesDropdown']);
 				$h1=$this->Solicitar_laboratorio_m->obtenHora($_POST['HoraIDropdown']);
 				$h2=$this->Solicitar_laboratorio_m->obtenHora($_POST['HoraFDropdown']);
@@ -77,12 +77,11 @@
  					'comentarios' => $_POST['comentarios']
 				
 				);
-						
+				
 				//Comprobando si el horario no está ocupado
 
-				$idHoraI=$this->Solicitar_laboratorio_m->obtenerIdHora($_POST['HoraIDropdown']);
-				$idHoraF=$this->Solicitar_laboratorio_m->obtenerIdHora($_POST['HoraFDropdown']);
-				
+				$idHoraI=$_POST['HoraIDropdown'];
+				$idHoraF=$_POST['HoraFDropdown'];
 				$indice=1;
 				
 				for ($j=$_POST['SemIDropdown']; $j <=$_POST['SemFDropdown']; $j++) { //Semanas 
@@ -93,7 +92,9 @@
 						}
 					}
 				}
+				
 				$no_disponible = array_unique($ocupado);
+				
 				if(sizeof($no_disponible)==1 AND ($no_disponible[1] == NULL || $no_disponible[1]==-1)){ //En caso de que los horarios estén disponibles, envía la solicitud
 					
 					$config['mailtype']='html';
@@ -110,10 +111,11 @@
 	                window.close();</script>";
 				
 				}else{ //En otro caso, le indica al usuario que el horario no está disponible
-					
+
+					echo "<script> alert('Lo sentimos. El laboratorio que usted está solicitando, no está disponible
+				    en este horario')</script>";						
 					$this->load->view('solicitar_lab_v', $Datos);
-					echo "<label class='error'>Lo sentimos. El laboratorio que usted está solicitando, no está disponible
-				    en este horario</label>";	
+
 				}
 		} //Fin de validación
 		else{
@@ -124,34 +126,5 @@
 
 		} //Fin de index
 		
-				
-		
-		public function nombreInput_check($nombreInput){
-				if($nombreInput==''){
-						$this->form_validation->set_message('nombreInput_check','Campo obligatorio. Por favor, introduce nombre');
-						return FALSE;
-					
-				}else
-						return TRUE;
-		}
-		
-		public function correoInput_check($correoInput){
-				if($correoInput==''){
-						$this->form_validation->set_message('correoInput_check','Campo de correo obligatorio');
-						return FALSE;
-					
-				}else
-						return TRUE;
-		}
-
-		public function ueaInput_check($ueaInput){
-				if($ueaInput==''){
-						$this->form_validation->set_message('ueaInput_check','Campo obligatorio');
-						return FALSE;
-					
-				}else
-						return TRUE;
-		}
-	
 	}//Fin de la clase
 ?>

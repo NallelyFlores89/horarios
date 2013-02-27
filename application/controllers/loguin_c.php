@@ -71,20 +71,7 @@
 				case '10':
 					redirect('recursos_admin_c/vaciar_recursos');
 					break;
-
-				case '11':
-					redirect('');
-					break;																		
-																						
-				case '12':
-					redirect('');
-					break;																		
-
-				case '13':
-					redirect('');
-					break;																		
-
-			}
+			} //Fin del switch
             // redirect('inicio_admin_c'); //Cargando página de administrador        
         }        
     }
