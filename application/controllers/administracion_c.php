@@ -7,7 +7,7 @@
 	        parent::__construct();
 			
 			$this->load->helper(array('html', 'url'));
-	        $this->load->model('administracion_m'); // modelo
+	        $this->load->model('administracion_m'); // modelos
 			$this->load->model('profesores_m');
 			$this->load->model('solicitar_laboratorio_m');
 			
@@ -44,17 +44,16 @@
 			}else{
 				if($_POST != NULL){
 					$this->administracion_m->eliminaUEA($iduea);
-					echo "llega?";
-					// echo "<script languaje='javascript' type='text/javascript'>
-							// window.opener.location.reload();
-							// window.close();</script>";				
+					echo "<script languaje='javascript' type='text/javascript'>
+							window.opener.location.reload();
+							window.close();</script>";				
 				}else{
 					$this->load->view('elimina_uea_v');
 				}
 			}	
 		}	
 
-		function edita($iduea, $siglas){
+		function edita($iduea, $siglas){ //Edita los datos de las UEAS como son sección, nombre de la uea, clave, etc.
 			if(! $this->session->userdata('validated')){
 				redirect('loguin_c/index2/NULL/2');
 			}else{
@@ -145,7 +144,7 @@
 						
 					}else{ 	//En caso de que exista, se le asigna su id al grupo					
 
-						$idprof = $this->administracion_m->obtenIdProf($_POST['profesor']);
+						$idprof = $this->administracion_m->obtenIdProf($_POST['profesor']); //Consultamos el id del profesor nuevo
 						$this->administracion_m->cambiaProfesor($idgrupo, $idprof);
 					}
 

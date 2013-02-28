@@ -111,9 +111,7 @@
 	                window.close();</script>";
 				
 				}else{ //En otro caso, le indica al usuario que el horario no está disponible
-
-					echo "<script> alert('Lo sentimos. El laboratorio que usted está solicitando, no está disponible
-				    en este horario')</script>";						
+					echo "<script>alert('Lo sentimos. El laboratorio que está solicitando, no está disponible en este horario')</script>";						
 					$this->load->view('solicitar_lab_v', $Datos);
 
 				}

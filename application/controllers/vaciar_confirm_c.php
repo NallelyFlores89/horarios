@@ -17,8 +17,8 @@
 		function index(){           //Cargamos vista
 			
 			if(! $this->session->userdata('validated')){
-				redirect('loguin_c');
-				}else{
+				redirect('loguin_c/index2/NULL/11');
+			}else{
 				
 				$this->form_validation->set_rules('checkboxes2[]', 'checkboxes2', 'required');
 				$this->form_validation->set_message('required','Escoja al menos un laboratorio');
@@ -32,13 +32,20 @@
 					}					
 					
 					foreach ($idsgrupo as $value) {
+						
 						if($value==-1){
 							echo "<br>horario vacío, nada por eliminar";
 						}else{
 							$gr = array_unique($value, SORT_REGULAR);
-							echo "<br> grupos a eliminar";print_r($gr);
+							
 							foreach ($gr as $valor2) {
-								$this->db->delete('grupo', array('idgrupo' => $valor2));
+								//Verificará si el grupo no está también en otro laboratorio que no se vaya a vaciar
+								//Si el grupo está en otro laboratorio que no se vaya a vaciar, simplemente se borrará de la tabla
+								$masDeUnLab = $this->Vaciar_confirm_m->obtenLab_Grupo($valor2);
+								//En caso de que el grupo no esté en otro laboratorio, se eliminará de la base de datos
+								if($masDeUnLab==-1){
+									$this->db->delete('grupo', array('idgrupo' => $valor2));
+								}
 							}
 						}
 					}

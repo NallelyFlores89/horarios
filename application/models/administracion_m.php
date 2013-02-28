@@ -18,6 +18,7 @@
 			$this->db->join('laboratorios_grupo','grupo.idgrupo=laboratorios_grupo.idgrupo');
 							
 			$this->db->distinct(); //Para que no se repitan los datos
+			$this->db->order_by('profesores.nombre');
 			$listaUeaProfesorGrupo=$this->db->get();
 			
 			if(($listaUeaProfesorGrupo->num_rows())>0){

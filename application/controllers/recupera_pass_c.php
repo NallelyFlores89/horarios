@@ -18,13 +18,14 @@
 						
 					$config['mailtype']='html';
 	 				$this->email->initialize($config);
-					$this->email->from('anjudark89@gmail.com', 'Nallely Flores');
+					$this->email->from('anjudark89@gmail.com', 'Laboratorios de Docencia CBI');
 					$this->email->to($_POST['correoInput']);
 					$this->email->subject('Recupere su contraseña');
 					$msj='Su contraseña es: '.$existe;			
 					$this->email->message($msj);				
 					$this->email->send();					
-					echo "<label>La clave de la contraseña ha sido enviada a su dirección de correo electrónico</label>";
+					echo "<script>alert('La clave de la contraseña ha sido enviada a su dirección de correo electrónico');
+							window.close();</script>";	
 					$this->load->view('recupera_pass_v');
 				}else{
 					echo "<label class='error'>El correo no existe en la base de datos</label>";

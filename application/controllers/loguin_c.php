@@ -71,6 +71,10 @@
 				case '10':
 					redirect('recursos_admin_c/vaciar_recursos');
 					break;
+				
+				case '11':
+					redirect('vaciar_confirm_c');
+					break;
 			} //Fin del switch
             // redirect('inicio_admin_c'); //Cargando página de administrador        
         }        

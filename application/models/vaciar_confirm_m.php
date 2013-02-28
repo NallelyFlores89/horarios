@@ -30,6 +30,21 @@
 		
 		} //Fin de obtenerGrupo
 		
+		function obtenLab_Grupo($idgrupo){
+			echo "el modelo recibió ".$idgrupo;
+			$this->db->select('idlaboratorios');
+			$this->db->where('idgrupo',$idgrupo);
+			$this->db->distinct();
+			echo "<br>";
+			$idsgrupos=$this->db->get('laboratorios_grupo');
+			print_r($idsgrupos->result_array());
+			if($idsgrupos->num_rows()>=1){
+				return 1;
+			}else{
+				return -1;
+			}
+		}
+		
 		function vaciarLaboratorio($idlab){
 			$datos= Array(
 				'idgrupo'=>NULL,
