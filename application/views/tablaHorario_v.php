@@ -13,7 +13,7 @@
 					<div class="row">
 						<dl class="tabs pill">
 							<?php
-								for ($i=1; $i <=13 ; $i++) {?> 
+								for ($i=1; $i <=12 ; $i++) {?> 
 									  <?php if($i==1){ ?>
 									  	<dd class="active"><a href="#pill<?= $i ?>"><?= $i ?></a></dd>
 									  <?php }else{ ?>
@@ -25,7 +25,7 @@
 					<ul class="tabs-content">
 						
 						<?php 
-							for($i=1; $i<=13; $i++){ 
+							for($i=1; $i<=12; $i++){ 
 							if($i==1){	
 						?>								
 									<li class="active" id="pill<?= $i ?>Tab">
@@ -93,7 +93,7 @@
 					<div class="row">
 						<dl class="tabs pill">
 							<?php
-								for ($i=1; $i <=13 ; $i++) {?> 
+								for ($i=1; $i <=12 ; $i++) {?> 
 									  <?php if($i==1){ ?>
 									  	<dd class="active"><a href="#pill106<?= $i ?>"><?= $i ?></a></dd>
 									  <?php }else{ ?>
@@ -105,7 +105,7 @@
 					<ul class="tabs-content">
 						
 						<?php 
-							for($i=1; $i<=13; $i++){
+							for($i=1; $i<=12; $i++){
 								
 								if($i==1){
 						?>
@@ -174,7 +174,7 @@
 					<div class="row">
 						<dl class="tabs pill">
 							<?php
-								for ($i=1; $i <=13 ; $i++) {?> 
+								for ($i=1; $i <=12 ; $i++) {?> 
 									  <?php if($i==1){ ?>
 									  	<dd class="active"><a href="#pill219<?= $i ?>"><?= $i ?></a></dd>
 									  <?php }else{ ?>
@@ -186,7 +186,7 @@
 					<ul class="tabs-content">
 						
 						<?php 
-							for($i=1; $i<=13; $i++){
+							for($i=1; $i<=12; $i++){
 								
 								if($i==1){
 								
@@ -255,7 +255,7 @@
 					<div class="row">
 						<dl class="tabs pill">
 							<?php
-								for ($i=1; $i <=13 ; $i++) {?> 
+								for ($i=1; $i <=12 ; $i++) {?> 
 									  <?php if($i==1){ ?>
 									  	<dd class="active"><a href="#pill220<?= $i ?>"><?= $i ?></a></dd>
 									  <?php }else{ ?>
@@ -266,7 +266,7 @@
 					
 					<ul class="tabs-content">
 						<?php 
-							for($i=1; $i<=13; $i++){ 
+							for($i=1; $i<=12; $i++){ 
 								if($i==1){	
 								
 						?>

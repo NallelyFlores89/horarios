@@ -28,6 +28,25 @@
 			}			
 		}		
 		
+		function traeAdministradoresId($id){
+			$this->db->select('idusuarioadmin,nombre');
+			$this->db->from('usuarioadmin');
+			$this->db->where('idusuarioadmin', $id);
+			
+			$users=$this->db->get();
+			
+			if(($users->num_rows())>0){
+				$indice=1;
+				foreach ($users->result_array() as $value) {
+					$usuarios[$indice]=$value;
+					$indice++;
+				}
+				return ($usuarios);
+			}else{
+				return -1;			
+			}			
+		}
+			
 		function compruebaPass($usuario){
 			$this->db->select('pass');
 			$this->db->from('usuarioadmin');
@@ -108,6 +127,28 @@
 			}						
 			
 		}
+		
+		function elimina_admin($id){
+			
+			$datos=Array(
+				'idusuarioadmin' => $id
+			
+			);
+			$this->db->delete('usuarioadmin', $datos); 					
+			
+		}
+
+		// function edita_admin($id){
+// 
+			// $datos=Array(
+				// 'nombre' => $nombre
+			// );
+// 			
+			// $this->db->where('idusuarioadmin', $id);
+			// $this->db->update('usuarioadmin', $datos); 						
+// 			
+		// }
+		
 	} //Fin de la clase
 
 ?>

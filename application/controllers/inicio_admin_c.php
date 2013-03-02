@@ -25,26 +25,26 @@
 			$Data['datosCC']=$this->Inicio_m->obtenListaUeasDiv(8);
 			$Data['datosOtros']=$this->Inicio_m->obtenListaUeasDiv(9);
 		
-			for ($sem=1; $sem <= 13 ; $sem++) { 
+			for ($sem=1; $sem <= 12 ; $sem++) { 
 				for ($dia=1; $dia <=5 ; $dia++) { 
 					$Data['$DataU105_'.$sem.'_'.$dia]=$this->Inicio_m->ueas(105,$sem,$dia);
 				}
 			}
 			 
-			for ($sem=1; $sem <= 13 ; $sem++) { 
+			for ($sem=1; $sem <= 12 ; $sem++) { 
 				for ($dia=1; $dia <=5 ; $dia++) { 
 					$Data['$DataU106_'.$sem.'_'.$dia]=$this->Inicio_m->ueas(106,$sem,$dia);
 				}
 
 			}
 				
-			for ($sem=1; $sem <= 13 ; $sem++) { 
+			for ($sem=1; $sem <= 12 ; $sem++) { 
 				for ($dia=1; $dia <=5 ; $dia++) { 
 					$Data['$DataU219_'.$sem.'_'.$dia]=$this->Inicio_m->ueas(219,$sem,$dia);
 				}
 			}
 			
-			for ($sem=1; $sem <= 13 ; $sem++) { 
+			for ($sem=1; $sem <= 12 ; $sem++) { 
 				for ($dia=1; $dia <=5 ; $dia++) { 
 					$Data['$DataU220_'.$sem.'_'.$dia]=$this->Inicio_m->ueas(220,$sem,$dia);
 				}

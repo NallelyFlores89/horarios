@@ -98,7 +98,7 @@
 					$idGrupo=$this->Agregar_horario_m->obtenerIdGrupo($_POST['siglasInput']); //Id definitivo del grupo a manejar
 													
 					//INSERTANDO EN LABORATORIO_GRUPO				
-					for ($j=1; $j <=13; $j++) { //Semanas
+					for ($j=1; $j <=12; $j++) { //Semanas
 						if($horaF==27){
 							for ($i=$horaI; $i <=26; $i++) {  //horas
 								foreach ($_POST['checkboxes'] as $dias) { //días

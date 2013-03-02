@@ -22,26 +22,26 @@
 			$Data['datosCC']=$this->Inicio_m->obtenListaUeasDiv(8);
 			$Data['datosOtros']=$this->Inicio_m->obtenListaUeasDiv(9);
 			
-			for ($sem=1; $sem <= 13 ; $sem++) { //Obteniendo datos para cargar las tablas del 105
+			for ($sem=1; $sem <= 12 ; $sem++) { //Obteniendo datos para cargar las tablas del 105
 				for ($dia=1; $dia <=5 ; $dia++) { 
 					$Data['$DataU105_'.$sem.'_'.$dia]=$this->Inicio_m->ueas(105,$sem,$dia);
 				}
 			}
 
-			for ($sem=1; $sem <= 13 ; $sem++) { //Obteniendo datos para cargar las tablas del 106
+			for ($sem=1; $sem <= 12 ; $sem++) { //Obteniendo datos para cargar las tablas del 106
 				for ($dia=1; $dia <=5 ; $dia++) { 
 					$Data['$DataU106_'.$sem.'_'.$dia]=$this->Inicio_m->ueas(106,$sem,$dia);
 				}
 
 			}
 				
-			for ($sem=1; $sem <= 13 ; $sem++) { //Obteniendo datos para cargar las tablas del 219
+			for ($sem=1; $sem <= 12 ; $sem++) { //Obteniendo datos para cargar las tablas del 219
 				for ($dia=1; $dia <=5 ; $dia++) { 
 					$Data['$DataU219_'.$sem.'_'.$dia]=$this->Inicio_m->ueas(219,$sem,$dia);
 				}
 			}
 			
-			for ($sem=1; $sem <= 13 ; $sem++) { //Obteniendo datos para cargar las tablas del 220
+			for ($sem=1; $sem <= 12 ; $sem++) { //Obteniendo datos para cargar las tablas del 220
 				for ($dia=1; $dia <=5 ; $dia++) { 
 					$Data['$DataU220_'.$sem.'_'.$dia]=$this->Inicio_m->ueas(220,$sem,$dia);
 				}

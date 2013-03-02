@@ -4,7 +4,7 @@
 <head>
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width" />
-    <title>Editar</title>
+    <title>Editar admin</title>
 	<link href='http://fonts.googleapis.com/css?family=Gafata' rel='stylesheet' type='text/css'>
   	<link rel="stylesheet" href="<?=base_url(); ?>statics/foundation/stylesheets/foundation.min.css">
   	<link rel="stylesheet" href="<?=base_url(); ?>statics/foundation/stylesheets/zurb.mega-drop.css">
@@ -25,22 +25,8 @@
 						<div class="row">
 							<div class="eight columns">
 								<label for="profesorInput">Nombre</label>
-					  			<input type="text" id="nombreInput" name="nombreInput" value="<?= $datosProf['nombre'] ?>"/>
+					  			<input type="text" id="nombreInput" name="nombreInput" value="<?= $admin[1]['nombre'] ?>"/>
 						 	</div>
-						 	
-							<div class="four columns">
-								<label for="numInput">No. Empleado</label>
-					  			<input type="text" id="numInput" name="numInput" value="<?= $datosProf['numempleado'] ?>"/>
-						 	</div>						 	
-						 </div>
-
-						<div class="row">
-							<div class="twelve columns">
-								<label for="correoInput">Correo electrónico</label>
-						  		<input type="email" id="correoInput" name="correoInput" pattern="([a-zA-Z0-9]+)@xanum.uam.mx" value="<?= $datosProf['correo']?>"/>
-						 	</div>
-						 </div>	
-
 						<div class="four columns"></div>
 						<input type="submit" id="editar" class="button large four columns" value="Guardar cambios" />
 						<div class="four columns"></div>

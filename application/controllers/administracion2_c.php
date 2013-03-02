@@ -131,5 +131,29 @@
 			return TRUE;
 		}
 		
+		public function elimina_admin($id){
+			if($_POST!=NULL){
+				$this->administracion2_m->elimina_admin($id);
+				echo "<script languaje='javascript' type='text/javascript'>
+					window.opener.location.reload();
+					window.close();</script>";	
+			}else{
+				$this->load->view('eliminaAdmin_v.php');
+			}			
+		}
+
+		// public function edita_admin($id){
+			// $datos['admin']=$this->administracion2_m->traeAdministradoresId($id);
+			// if($_POST!=NULL){
+				// $this->administracion2_m->editaAdministrador($id);
+				// echo "<script languaje='javascript' type='text/javascript'>
+					// window.opener.location.reload();
+					// window.close();</script>";	
+			// }else{
+				// $this->load->view('editaAdmin_v.php', $datos);
+			// }
+// 			
+		// }
+		
 	} //fin de la clase
 ?>

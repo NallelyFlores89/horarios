@@ -16,6 +16,8 @@
   	<script src="<?=base_url(); ?>statics/foundation/javascripts/modernizr.foundation.js"></script>
 	<script src="<?=base_url(); ?>statics/responsiveTable/responsive-tables.js"></script>
    	<script src="<?=base_url(); ?>statics/foundation/javascripts/marketing_docs.js"></script>
+   	<script> base = "<?= base_url(); ?>"</script>
+	<script src="<?=base_url(); ?>statics/js/administracion2.js"></script>
 </head>
 
 <body>
@@ -119,6 +121,7 @@
 						<th>Nombre</th>
 						<th>Usuario</th>
 						<th>Correo</th>
+						<th colspan="1">Acciones</th>
 					</tr>
 					<?php
 						foreach ($usuarios as $value) { ?>
@@ -126,6 +129,8 @@
 								<td id=''><?= $value['nombre'] ?> </td>
 								<td id=''><?= $value['usuario'] ?> </td>
 								<td id=''><?= $value['correo'] ?> </td>
+								<td><a href="#" onclick="eliminaAdmin(<?= $value['idusuarioadmin'] ?>)">Eliminar</a></td>
+
 							</tr>
 						<? }?>
 
