@@ -61,9 +61,6 @@
 											foreach ($DataLabos as $value) {
 												$labos[$value['idlaboratorios']]=$value['nombrelaboratorios'];
 											}
-											$atributos=array(
-												'id' => 'divisionesDropdown',
-											);
 											echo form_dropdown('laboratoriosDropdown', $labos, set_value('laboratoriosDropdown'), 'id="laboratoriosDropdown"');
 									    ?>
 
@@ -78,20 +75,21 @@
 												foreach ($DataHorarios as $index => $value) {
 													$time[$index]=substr($value,0,-6);							
 												}
-												echo form_dropdown('HoraIDropdown', $time, set_value('HoraIDropdown') );
+												
+												echo form_dropdown('HoraIDropdown', $time, set_value('HoraIDropdown'), 'id="HoraIDropdown"');
 											?>
 										</div>
 								</div>
 									
 								<div class="row">
 									<div class="six columns">
-						                <label for="HoraFAltDropdown">Hora de Term</label>
+						                <label for="HoraFDropdown">Hora de Term</label>
 										<?php 
 											foreach ($DataHorarios as $index => $value) {
 												$time[$index]=substr($value,0,-6);							
 											}
 											$time[27]='21:00';
-											echo form_dropdown('HoraFDropdown', $time, set_value('HoraFDropdown') );
+											echo form_dropdown('HoraFDropdown', $time, set_value('HoraFDropdown'), 'id="HoraFDropdown"' );
 										?>
 									</div>
 								</div>

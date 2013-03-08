@@ -139,7 +139,6 @@
 					if($idprof == -1){
 						$this->profesores_m->inserta_profesores($_POST['profesor'], '', '');
 						$idprof = $this->administracion_m->obtenIdProf($_POST['profesor']);
-						echo $idprof;
 						$this->administracion_m->cambiaProfesor($idgrupo, $idprof);						
 						
 					}else{ 	//En caso de que exista, se le asigna su id al grupo					

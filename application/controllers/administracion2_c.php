@@ -127,7 +127,6 @@
 				$this->form_validation->set_message('correo_check','El correo ya está registrado');
 				return FALSE;
 			}
-			
 			return TRUE;
 		}
 		

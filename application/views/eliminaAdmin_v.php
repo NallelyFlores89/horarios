@@ -22,10 +22,8 @@
 					<form class="custom" action="" method="post">
 						<label class="pregunta">¿Seguro que desea eliminar al administrador?</label>
 						<input type="submit" id="EliminarBtn" class="button offset-by-four" name="eliminar" value="Sí" />
-
 				</fieldset>
 			</div> <!--twelve colums-->
 		</div> <!--row-->
-
 </body>
 </html>

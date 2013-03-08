@@ -65,27 +65,19 @@
 		}	
 		
 		function actualizaPass($usuario, $nuevaPass){
-			
-			$datos = Array(
-				'pass' => $nuevaPass,
-			);
-			
+			$datos = Array('pass' => $nuevaPass);
 			$this->db->where('usuario',$usuario);
 			$this->db->update('usuarioadmin', $datos); 
 		}
 
 		function actualizaCorreo($usuario, $correo){
-			
-			$datos = Array(
-				'correo' => $correo,
-			);
+			$datos = Array(	'correo' => $correo);
 			
 			$this->db->where('usuario',$usuario);
 			$this->db->update('usuarioadmin', $datos); 
 		}	
 		
 		function agregaAdmin($nombre, $usuario, $correo, $pass){
-			
 			$datos = Array(
 				'usuario' => $usuario,
 				'pass' => $pass,
@@ -97,7 +89,6 @@
 		}			
 		
 		function verificaUsuario($usuario){
-			
 			$this->db->select('idusuarioadmin');
 			$this->db->from('usuarioadmin');
 			$this->db->where('usuario', $usuario);
@@ -113,7 +104,6 @@
 		}
 		
 		function verificaCorreo($correo){
-			
 			$this->db->select('idusuarioadmin');
 			$this->db->from('usuarioadmin');
 			$this->db->where('correo', $correo);
@@ -125,30 +115,12 @@
 			}else{
 				return -1;			
 			}						
-			
 		}
 		
 		function elimina_admin($id){
-			
-			$datos=Array(
-				'idusuarioadmin' => $id
-			
-			);
+			$datos=Array('idusuarioadmin' => $id);
 			$this->db->delete('usuarioadmin', $datos); 					
-			
-		}
-
-		// function edita_admin($id){
-// 
-			// $datos=Array(
-				// 'nombre' => $nombre
-			// );
-// 			
-			// $this->db->where('idusuarioadmin', $id);
-			// $this->db->update('usuarioadmin', $datos); 						
-// 			
-		// }
-		
+		}		
 	} //Fin de la clase
 
 ?>

@@ -26,10 +26,7 @@
 				redirect('loguin_c/index2/NULL/6');
 			}else{				
 				if($_POST != NULL){
-					$idprof=$this->administracion_m->obtenIdProf($id);
 					$grupos=$this->administracion_m->obtenGruposxProf($id); 
-					
-					
 					foreach ($grupos as $value) { //Elimina los grupos dados por el profesor
 						$this->administracion_m->eliminaGrupo($value['idgrupo']);
 					}
@@ -57,11 +54,10 @@
 				$this->form_validation->set_rules('correoInput', 'correoInput', 'email_valid');
 
 				$this->form_validation->set_message('required','Este campo no puede ser nulo');
-				$this->form_validation->set_message('email_valid','Ingrese una dirección de correo valida');
 	
 				if($this->form_validation->run()){
 					
-					$this->administracion_m->editaProfesor($id, $_POST['nombreInput'], $_POST['numInput'],$_POST['correoInput']);
+					$this->profesores_m->editaProfesor($id, $_POST['nombreInput'], $_POST['numInput'],$_POST['correoInput']);
 					
 					echo "<script languaje='javascript' type='text/javascript'>
 							window.opener.location.reload();

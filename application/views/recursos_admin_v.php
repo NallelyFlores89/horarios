@@ -63,7 +63,7 @@
 										echo"<hr>";
 									}
 								}else{
-		  				    		echo "<label class='noDatos'> No hay datos que cargar</label>";
+		  				    		echo "<label class='noDatos'> No se han agregado recursos </label>";
 								}	            			
 	            			?>
 	            		</ul>
@@ -99,7 +99,7 @@
 										echo"<hr>";
 									}
 								}else{
-									echo "<label class='noDatos'> No hay datos que cargar</label>";
+									echo "<label class='noDatos'> No se han agregado recursos </label>";
 								}	            			
 	            			?>            			
 	            		</ul>
@@ -135,7 +135,7 @@
 										echo"<hr>";
 									}
 								}else{
-									echo "<label class='noDatos'> No hay datos que cargar</label>";
+									echo "<label class='noDatos'> No se han agregado recursos </label>";
 									
 								}	            			
 	            			?> 	            			
@@ -171,7 +171,7 @@
 										echo"<hr>";
 									}
 								}else{
-									echo "<label class='noDatos'> No hay datos que cargar</label>";
+									echo "<label class='noDatos'> No se han agregado recursos </label>";
 								}	            			
 	            			?> 	 	            			
 	            		</ul>

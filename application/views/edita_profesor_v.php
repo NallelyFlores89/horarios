@@ -25,7 +25,7 @@
 						<div class="row">
 							<div class="eight columns">
 								<label for="profesorInput">Nombre</label>
-					  			<input type="text" id="nombreInput" name="nombreInput" value="<?= $datosProf['nombre'] ?>"/>
+					  			<input type="text" id="nombreInput" name="nombreInput" value="<?= $datosProf['nombre'] ?>" required/>
 						 	</div>
 						 	
 							<div class="four columns">

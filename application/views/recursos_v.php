@@ -41,7 +41,7 @@
 										echo "<li>"; print_r($valor['recurso']); echo "</li>";
 									}	
 								}else{
-									echo "<label class='noDatos'> No hay datos que cargar</label>";
+									echo "<label class='noDatos'> No se han agregado recursos </label>";
 								}            			
 	            			?>
 	            			
@@ -59,7 +59,7 @@
 										echo "<li>"; print_r($valor['recurso']); echo "</li>";
 									}
 								}else{
-									echo "<label class='noDatos'> No hay datos que cargar</label>";
+									echo "<label class='noDatos'> No se han agregado recursos </label>";
 								}	            			
 	            			?>	            			
 	            		</ul>				  		
@@ -74,7 +74,7 @@
 										echo "<li>"; print_r($valor['recurso']); echo "</li>";
 									}	        
 								}else{
-										echo "<label class='noDatos'> No hay datos que cargar</label>";
+										echo "<label class='noDatos'> No se han agregado recursos </label>";
 								}    			
 	            			?>	            			
 	            		</ul>
@@ -90,7 +90,7 @@
 										echo "<li>"; print_r($valor['recurso']); echo "</li>";
 									}
 								}else{
-									echo "<label class='noDatos'> No hay datos que cargar</label>";
+									echo "<label class='noDatos'> No se han agregado recursos </label>";
 								}	            			
 	            			?>	 	            			
 	            		</ul>

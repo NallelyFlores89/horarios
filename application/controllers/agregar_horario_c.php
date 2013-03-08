@@ -249,7 +249,12 @@
 				}				
 				
 			}
-																
+			
+			function envia_hora_dsps(){
+				$term = $this->input->post('horaI',TRUE);
+				echo json_encode($term+1);
+
+			}							
 
 	
 	}//Fin de la clase

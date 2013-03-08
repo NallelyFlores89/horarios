@@ -5,7 +5,7 @@
 			    <ul class="disc listacbi">
   				    <?php  
   				    	if($Data['datosCBI']==-1){
-  				    		echo "<label class='noDatos'> No hay datos que cargar</label>";
+  				    		echo "<label class='noDatos'> Sin cursos</label>";
   				    	}else{
 		    				  				    		
 							foreach ($Data['datosCBI'] as $valor) {
@@ -27,7 +27,7 @@
 			    <ul class="disc listacbs">
   				    <?php  
   				    	if($Data['datosCBS']==-1){
-  				    		echo "<label class='noDatos'> No hay datos que cargar</label>";
+  				    		echo "<label class='noDatos'> Sin cursos</label>";
   				    		
   				    	}else{			    	
 							foreach ($Data['datosCBS'] as $valor) {
@@ -48,7 +48,7 @@
 			    <ul class="disc listacsh">
   				    <?php  
   				    	if($Data['datosCSH']==-1){
-  				    		echo "<label class='noDatos'> No hay datos que cargar</label>";
+  				    		echo "<label class='noDatos'> Sin cursos </label>";
 						}else{
 							foreach ($Data['datosCSH'] as $valor) {
 								$cadena='('.$valor['siglas'].')';
@@ -72,7 +72,7 @@
 				<ul class="disc listacompu">
   				    <?php  
   				    	if($Data['datosCompu']==-1){
-  				    		echo "<label class='noDatos'> No hay datos que cargar</label>";
+  				    		echo "<label class='noDatos'> Sin cursos </label>";
 						}else{
 							foreach ($Data['datosCompu'] as $valor) {
 								$cadena='('.$valor['siglas'].')';
@@ -93,7 +93,7 @@
 		  		<ul class="disc listabio">
   				    <?php  
   				    	if($Data['datosBio']==-1){
-  				    		echo "<label class='noDatos'> No hay datos que cargar</label>";
+  				    		echo "<label class='noDatos'> Sin cursos </label>";
 						}else{
 							foreach ($Data['datosBio'] as $valor) {
 								$cadena='('.$valor['siglas'].')';
@@ -114,7 +114,7 @@
 		  		<ul class="disc listaele">
   				    <?php  
   				    	if($Data['datosElec']==-1){
-  				    		echo "<label class='noDatos'> No hay datos que cargar</label>";
+  				    		echo "<label class='noDatos'> Sin cursos </label>";
 						}else{
 							foreach ($Data['datosElec'] as $valor) {
 								$cadena='('.$valor['siglas'].')';
@@ -138,7 +138,7 @@
 				<ul class="disc listapos">
   				    <?php  
   				    	if($Data['datosPCITI']==-1){
-  				    		echo "<label class='noDatos'> No hay datos que cargar</label>";
+  				    		echo "<label class='noDatos'> Sin cursos </label>";
 						}else{
 							foreach ($Data['datosPCITI'] as $valor) {
 								$cadena='('.$valor['siglas'].')';
@@ -159,7 +159,7 @@
 				<ul class="disc listacomple">
   				    <?php  
   				    	if($Data['datosCC']==-1){
-  				    		echo "<label class='noDatos'> No hay datos que cargar</label>";
+  				    		echo "<label class='noDatos'> Sin cursos </label>";
 						}else{
 							foreach ($Data['datosCC'] as $valor) {
 								$cadena='('.$valor['siglas'].')';
@@ -180,7 +180,7 @@
 				<ul class="disc listaotro">
   				    <?php  
   				    	if($Data['datosOtros']==-1){
-  				    		echo "<label class='noDatos'> No hay datos que cargar</label>";
+  				    		echo "<label class='noDatos'> Sin cursos</label>";
 						}else{
 							foreach ($Data['datosOtros'] as $valor) {
 								$cadena='('.$valor['siglas'].')';

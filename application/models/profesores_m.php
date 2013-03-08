@@ -56,6 +56,19 @@
 			$this->db->insert('profesores', $datos); //Insertan en la tabla profesores
 			
 		} //Fin insertaProfesor
+		
+		function editaProfesor($id, $nombre, $num_emp, $correo){
+				
+			$datos=Array(
+				'nombre' => $nombre,
+				'numempleado' => $num_emp,
+				'correo' => $correo,
+			);		
+			$this->db->where('idprofesores', $id);
+
+			$this->db->update('profesores', $datos); //Insertan en la tabla profesores
+			
+		}
 				
 	} //Fin de la clase
 ?>
